@@ -9,12 +9,12 @@ public class Users implements Serializable{
     private Integer uid;
     private  String userName;
     private  String identity;
-    private  String  fullname;
+    private  String  fullName;
     private  String  gender;
     private String   address;
     private String   phone;
     private Integer  roleid;
-    private  String  userpwd;
+    private  String  userPwd;
     private  String  position;
 
     @Override
@@ -27,12 +27,12 @@ public class Users implements Serializable{
         if (getUid() != null ? !getUid().equals(users.getUid()) : users.getUid() != null) return false;
         if (getUserName() != null ? !getUserName().equals(users.getUserName()) : users.getUserName() != null) return false;
         if (getIdentity() != null ? !getIdentity().equals(users.getIdentity()) : users.getIdentity() != null) return false;
-        if (getFullname() != null ? !getFullname().equals(users.getFullname()) : users.getFullname() != null) return false;
+        if (getFullName() != null ? !getFullName().equals(users.getFullName()) : users.getFullName() != null) return false;
         if (getGender() != null ? !getGender().equals(users.getGender()) : users.getGender() != null) return false;
         if (getAddress() != null ? !getAddress().equals(users.getAddress()) : users.getAddress() != null) return false;
         if (getPhone() != null ? !getPhone().equals(users.getPhone()) : users.getPhone() != null) return false;
         if (getRoleid() != null ? !getRoleid().equals(users.getRoleid()) : users.getRoleid() != null) return false;
-        if (getUserpwd() != null ? !getUserpwd().equals(users.getUserpwd()) : users.getUserpwd() != null) return false;
+        if (getUserPwd() != null ? !getUserPwd().equals(users.getUserPwd()) : users.getUserPwd() != null) return false;
         return getPosition() != null ? getPosition().equals(users.getPosition()) : users.getPosition() == null;
     }
 
@@ -41,12 +41,12 @@ public class Users implements Serializable{
         int result = getUid() != null ? getUid().hashCode() : 0;
         result = 31 * result + (getUserName() != null ? getUserName().hashCode() : 0);
         result = 31 * result + (getIdentity() != null ? getIdentity().hashCode() : 0);
-        result = 31 * result + (getFullname() != null ? getFullname().hashCode() : 0);
+        result = 31 * result + (getFullName() != null ? getFullName().hashCode() : 0);
         result = 31 * result + (getGender() != null ? getGender().hashCode() : 0);
         result = 31 * result + (getAddress() != null ? getAddress().hashCode() : 0);
         result = 31 * result + (getPhone() != null ? getPhone().hashCode() : 0);
         result = 31 * result + (getRoleid() != null ? getRoleid().hashCode() : 0);
-        result = 31 * result + (getUserpwd() != null ? getUserpwd().hashCode() : 0);
+        result = 31 * result + (getUserPwd() != null ? getUserPwd().hashCode() : 0);
         result = 31 * result + (getPosition() != null ? getPosition().hashCode() : 0);
         return result;
     }
@@ -57,12 +57,12 @@ public class Users implements Serializable{
                 "uid=" + uid +
                 ", userName='" + userName + '\'' +
                 ", identity='" + identity + '\'' +
-                ", fullname='" + fullname + '\'' +
+                ", fullName='" + fullName + '\'' +
                 ", gender='" + gender + '\'' +
                 ", address='" + address + '\'' +
                 ", phone='" + phone + '\'' +
                 ", roleid=" + roleid +
-                ", userpwd='" + userpwd + '\'' +
+                ", userPwd='" + userPwd + '\'' +
                 ", position='" + position + '\'' +
                 '}';
     }
@@ -94,12 +94,12 @@ public class Users implements Serializable{
         this.identity = identity;
     }
 
-    public String getFullname() {
-        return fullname;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setFullname(String fullname) {
-        this.fullname = fullname;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public String getGender() {
@@ -134,12 +134,12 @@ public class Users implements Serializable{
         this.roleid = roleid;
     }
 
-    public String getUserpwd() {
-        return userpwd;
+    public String getUserPwd() {
+        return userPwd;
     }
 
-    public void setUserpwd(String userpwd) {
-        this.userpwd = userpwd;
+    public void setUserPwd(String userPwd) {
+        this.userPwd = userPwd;
     }
 
     public String getPosition() {
