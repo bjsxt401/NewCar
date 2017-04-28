@@ -1,4 +1,4 @@
-package cn.sxt.controller;
+package cn.sxt.controller.customersManager;
 
 import cn.sxt.entity.Customers;
 import org.springframework.stereotype.Controller;
