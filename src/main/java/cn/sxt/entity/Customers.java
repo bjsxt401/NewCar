@@ -5,9 +5,9 @@ package cn.sxt.entity;
  */
 public class Customers {
     private int id;               //客户ID
-    private String idrntity;      //身份证号
+    private String identity;      //身份证号
     private String custName;      //客户姓名
-    private String sex;           //性别
+    private String gender;           //性别
     private String address;       //地址
     private String phone;         //电话
     private String career;        //职业
@@ -21,12 +21,12 @@ public class Customers {
         this.id = id;
     }
 
-    public String getIdrntity() {
-        return idrntity;
+    public String getIdentity() {
+        return identity;
     }
 
-    public void setIdrntity(String idrntity) {
-        this.idrntity = idrntity;
+    public void setIdentity(String idrntity) {
+        this.identity = idrntity;
     }
 
     public String getCustName() {
@@ -37,13 +37,6 @@ public class Customers {
         this.custName = custName;
     }
 
-    public String getSex() {
-        return sex;
-    }
-
-    public void setSex(String sex) {
-        this.sex = sex;
-    }
 
     public String getAddress() {
         return address;
@@ -85,9 +78,9 @@ public class Customers {
         Customers customers = (Customers) o;
 
         if (id != customers.id) return false;
-        if (idrntity != null ? !idrntity.equals(customers.idrntity) : customers.idrntity != null) return false;
+        if (identity != null ? !identity.equals(customers.identity) : customers.identity != null) return false;
         if (custName != null ? !custName.equals(customers.custName) : customers.custName != null) return false;
-        if (sex != null ? !sex.equals(customers.sex) : customers.sex != null) return false;
+        if (gender != null ? !gender.equals(customers.gender) : customers.gender != null) return false;
         if (address != null ? !address.equals(customers.address) : customers.address != null) return false;
         if (phone != null ? !phone.equals(customers.phone) : customers.phone != null) return false;
         if (career != null ? !career.equals(customers.career) : customers.career != null) return false;
@@ -97,9 +90,9 @@ public class Customers {
     @Override
     public int hashCode() {
         int result = id;
-        result = 31 * result + (idrntity != null ? idrntity.hashCode() : 0);
+        result = 31 * result + (identity != null ? identity.hashCode() : 0);
         result = 31 * result + (custName != null ? custName.hashCode() : 0);
-        result = 31 * result + (sex != null ? sex.hashCode() : 0);
+        result = 31 * result + (gender != null ? gender.hashCode() : 0);
         result = 31 * result + (address != null ? address.hashCode() : 0);
         result = 31 * result + (phone != null ? phone.hashCode() : 0);
         result = 31 * result + (career != null ? career.hashCode() : 0);
@@ -107,15 +100,12 @@ public class Customers {
         return result;
     }
 
-    public Customers(int id, String idrntity, String custName, String sex, String address, String phone, String career, String password) {
-        this.id = id;
-        this.idrntity = idrntity;
-        this.custName = custName;
-        this.sex = sex;
-        this.address = address;
-        this.phone = phone;
-        this.career = career;
-        this.password = password;
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     public Customers() {
@@ -125,13 +115,23 @@ public class Customers {
     public String toString() {
         return "Customers{" +
                 "id=" + id +
-                ", idrntity='" + idrntity + '\'' +
+                ", identity='" + identity + '\'' +
                 ", custName='" + custName + '\'' +
-                ", sex='" + sex + '\'' +
+                ", gender='" + gender + '\'' +
                 ", address='" + address + '\'' +
                 ", phone='" + phone + '\'' +
                 ", career='" + career + '\'' +
                 ", password='" + password + '\'' +
                 '}';
+    }
+
+    public Customers(String identity, String custName, String gender, String address, String phone, String career, String password) {
+        this.identity = identity;
+        this.custName = custName;
+        this.gender = gender;
+        this.address = address;
+        this.phone = phone;
+        this.career = career;
+        this.password = password;
     }
 }

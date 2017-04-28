@@ -4,8 +4,8 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.sxt.mapper.CustomersMapper">
          <insert id="registerCustomer">
-              INSERT  INTO  tb_
-
+              INSERT  INTO  customers (identity,custname,gender,address,phone,career,password)
+                VALUES (#{identity},#{custName},#{gender},#{address},#{phone},#{career},#{password})
          </insert>
 
 </mapper>

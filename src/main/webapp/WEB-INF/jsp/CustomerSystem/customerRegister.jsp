@@ -15,7 +15,7 @@
     </script>
 </head>
 <body>
-<form action="/cust/register.action" method="post">
+<form action="/newcar/customer/register.action" method="post">
 
     <table width="100%" cellpadding="0" cellspacing="0" border="0" style="text-align: center">
         <tr>
@@ -63,9 +63,9 @@
                 性别
             </td>
             <td>
-                <input type="text" name="sex" id="sex">
+                <input type="text" name="gender" id="gender">
             </td>
-            <td><span id="sexSpan">&nbsp;</span></td>
+            <td><span id="genderSpan">&nbsp;</span></td>
         </tr>
         <tr>
             <td>
