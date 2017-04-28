@@ -3,6 +3,11 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.sxt.mapper.UserMapper">
-    
+
+    <select id="getUserByUser" resultType="cn.sxt.entity.Users">
+          SELECT uid,username AS userName,identity,fullname AS fullName,gender,
+          address,phone,roleid,userpwd AS userPwd,position FROM users
+          WHERE username=#{userName} AND userpwd=#{userPwd}
+    </select>
 
 </mapper>
