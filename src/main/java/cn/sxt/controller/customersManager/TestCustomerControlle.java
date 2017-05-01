@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class TestCustomerControlle {
     @RequestMapping("/{path}")
     public String go(@PathVariable("path")String path){
-        System.out.println("123");
         return "CustomerSystem/"+path;
     }
 

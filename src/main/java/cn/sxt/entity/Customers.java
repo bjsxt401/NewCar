@@ -4,7 +4,7 @@ package cn.sxt.entity;
  * Created by Administrator on 2017/4/28.
  */
 public class Customers {
-    private int id;               //客户ID
+    private int cid;               //客户ID
     private String identity;      //身份证号
     private String custName;      //客户姓名
     private String gender;           //性别
@@ -14,11 +14,11 @@ public class Customers {
     private String password;      //密码
 
     public int getId() {
-        return id;
+        return cid;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.cid = id;
     }
 
     public String getIdentity() {
@@ -77,7 +77,7 @@ public class Customers {
 
         Customers customers = (Customers) o;
 
-        if (id != customers.id) return false;
+        if (cid != customers.cid) return false;
         if (identity != null ? !identity.equals(customers.identity) : customers.identity != null) return false;
         if (custName != null ? !custName.equals(customers.custName) : customers.custName != null) return false;
         if (gender != null ? !gender.equals(customers.gender) : customers.gender != null) return false;
@@ -89,7 +89,7 @@ public class Customers {
 
     @Override
     public int hashCode() {
-        int result = id;
+        int result = cid;
         result = 31 * result + (identity != null ? identity.hashCode() : 0);
         result = 31 * result + (custName != null ? custName.hashCode() : 0);
         result = 31 * result + (gender != null ? gender.hashCode() : 0);
@@ -114,7 +114,7 @@ public class Customers {
     @Override
     public String toString() {
         return "Customers{" +
-                "id=" + id +
+                "id=" + cid +
                 ", identity='" + identity + '\'' +
                 ", custName='" + custName + '\'' +
                 ", gender='" + gender + '\'' +
@@ -125,7 +125,7 @@ public class Customers {
                 '}';
     }
 
-    public Customers(String identity, String custName, String gender, String address, String phone, String career, String password) {
+    public Customers(Integer cid,String identity, String custName, String gender, String address, String phone, String career, String password) {
         this.identity = identity;
         this.custName = custName;
         this.gender = gender;

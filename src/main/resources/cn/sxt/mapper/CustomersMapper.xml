@@ -3,9 +3,88 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.sxt.mapper.CustomersMapper">
+    
          <insert id="registerCustomer">
               INSERT  INTO  customers (identity,custname,gender,address,phone,career,password)
                 VALUES (#{identity},#{custName},#{gender},#{address},#{phone},#{career},#{password})
          </insert>
 
+          <select   id="selectCustomersByCondition" resultType="cn.sxt.entity.Customers">
+                SELECT cid,identity,custname,gender,address,phone,career,password FROM customers
+                <where>
+                    <if test="identity!=null">
+                        AND  identity = #{customer.identity}
+                    </if>
+                    <if test="custName!=null">
+                        AND  custName = #{customer.custName}
+                    </if>
+                    <if test="gender!=null">
+                        AND  gender = #{customer.gender}
+                    </if>
+                    <if test="address!=null">
+                        AND  address = #{customer.address}
+                    </if>
+                    <if test="phone!=null">
+                        AND  phone = #{customer.phone}
+                    </if>
+                    <if test="career!=null">
+                        AND  career = #{customer.career}
+                    </if>
+                </where>
+              order by cid
+              limit #{pageBean.startNum},#{pageBean.pageSize}
+          </select>
+
+
+    <select id="totalByCondition" resultType="java.lang.Integer">
+        SELECT count(cid) FROM customers
+        <where>
+            <if test="identity!=''">
+                AND  identity = #{identity}
+            </if>
+            <if test="custName!=''">
+                AND  custName = #{custName}
+            </if>
+            <if test="gender!=''">
+                AND  gender = #{gender}
+            </if>
+            <if test="address!=''">
+                AND  address = #{address}
+            </if>
+            <if test="phone!=''">
+                AND  phone = #{phone}
+            </if>
+            <if test="career!=''">
+                AND  career = #{career}
+            </if>
+        </where>
+
+    </select>
+
+    <delete id="deleteCustomer">
+         DELETE from customers where cid=#{cid}
+    </delete>
+
+
+
+    <select id="selectModifyCustomer" resultType="cn.sxt.entity.Customers">
+        SELECT cid,identity,custname,gender,address,phone,career,password FROM customers
+        where cid=#{cid}
+
+    </select>
+    <update id="modifyCustomer" >
+        update customers set
+        identity = #{identity}
+        ,  custName = #{custName}
+        ,  gender = #{gender}
+        ,  address = #{address}
+        ,  phone = #{phone}
+        ,  career = #{career}
+        where cid = #{id}
+    </update>
+    
+    <update id="modifyCustomerPwd">
+        update customers set password = #{password} where cid = #{id}
+
+    </update>
 </mapper>
