@@ -52,7 +52,7 @@
             <span><img src="images/leftico01.png" /></span>用户管理
         </div>
         <ul class="menuson">
-            <li><cite></cite><a href="index.html" target="rightFrame">添加用户</a><i></i></li>
+            <li><cite></cite><a href="user/addUser.action" target="rightFrame">添加用户</a><i></i></li>
             <li class="active"><cite></cite><a href="right.html" target="rightFrame">查询用户</a><i></i></li>
         </ul>
     </dd>
