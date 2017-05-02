@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.portlet.bind.annotation.RenderMapping;
 
 import javax.servlet.http.HttpSession;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -31,6 +32,7 @@ public class CustomerController {
     @RequestMapping("/register")
     public String registerCustomer(Customers customer){
          System.out.println(customer);
+
             this.customersService.registerCustomer(customer);
         return "CustomerSystem/finish";
      }
@@ -44,9 +46,7 @@ public class CustomerController {
     @ResponseBody
     public Object selectCustomer(PageBean pageBean, HttpSession session){
         Customers customer = (Customers) session.getAttribute("ConditionByCustomers");
-        System.out.println(customer);
         Map<String,Object> custPage = this.customersService.selectCustomers(customer,pageBean);
-        System.out.println(custPage);
         try {
             return  new ObjectMapper().writeValueAsString(custPage);
         }catch (Exception e){
@@ -64,6 +64,7 @@ public class CustomerController {
     @RequestMapping("/setCondition")
     public String setSelectCondition(Customers customer,HttpSession session){
         session.setAttribute("ConditionByCustomers",customer);
+
         return "CustomerSystem/customersByPage";
     }
 
@@ -95,13 +96,38 @@ public class CustomerController {
     public String modifyCustomer(Customers customer){
         System.out.println(customer);
         this.customersService.modifyCustomer(customer);
+
         return "CustomerSystem/finish";
 
     }
 
+    /**
+     *修改客户信息
+     * @param customer
+     * @return
+     */
     @RequestMapping("/modifyCustomerPwd")
     public String modifyPwd(Customers customer){
         this.customersService.modifyCustomerPwd(customer);
         return "CustomerSystem/finish";
+    }/**
+     *查询证件号是否已被注册
+     * @param identity   证件号
+     * @return
+     */
+    @RequestMapping(value = "/selectIdentity",produces={"application/json;charset=UTF-8"})
+    @ResponseBody
+    public Object selectIdentity(String identity){
+         boolean result =    this.customersService.selectIdentity(identity);
+        System.out.println(result);
+         Map<String,Boolean> map = new HashMap<String,Boolean>();
+         map.put("result",result);
+        try {
+            return  new ObjectMapper().writeValueAsString(map);
+        }catch (Exception e){
+
+        }
+        return null;
     }
+
 }

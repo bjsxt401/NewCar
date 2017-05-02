@@ -9,28 +9,29 @@
                 VALUES (#{identity},#{custName},#{gender},#{address},#{phone},#{career},#{password})
          </insert>
 
-          <select   id="selectCustomersByCondition" resultType="cn.sxt.entity.Customers">
+          <select   id="selectCustomersByCondition"  resultType="cn.sxt.entity.Customers">
                 SELECT cid,identity,custname,gender,address,phone,career,password FROM customers
-                <where>
-                    <if test="identity!=null">
-                        AND  identity = #{customer.identity}
-                    </if>
-                    <if test="custName!=null">
-                        AND  custName = #{customer.custName}
-                    </if>
-                    <if test="gender!=null">
-                        AND  gender = #{customer.gender}
-                    </if>
-                    <if test="address!=null">
-                        AND  address = #{customer.address}
-                    </if>
-                    <if test="phone!=null">
-                        AND  phone = #{customer.phone}
-                    </if>
-                    <if test="career!=null">
-                        AND  career = #{customer.career}
-                    </if>
-                </where>
+              <where>
+                  <if test="customer.identity!=''" >
+                      AND  identity = #{customer.identity}
+                  </if>
+                  <if test="customer.custName!=''">
+                      AND  custName = #{customer.custName}
+                  </if>
+                  <if test="customer.gender!=''">
+                      AND  gender = #{customer.gender}
+                  </if>
+                  <if test="customer.address!=''">
+                      AND  address = #{customer.address}
+                  </if>
+                  <if test="customer.phone!=''">
+                      AND  phone = #{customer.phone}
+                  </if>
+                  <if test="customer.career!=''">
+                      AND  career = #{customer.career}
+                  </if>
+              </where>
+
               order by cid
               limit #{pageBean.startNum},#{pageBean.pageSize}
           </select>
@@ -87,4 +88,8 @@
         update customers set password = #{password} where cid = #{id}
 
     </update>
+    <select id="selectIdentity" resultType="boolean">
+         select * from customers where identity = #{identity}
+    </select>
 </mapper>
+

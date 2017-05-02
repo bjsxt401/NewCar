@@ -19,6 +19,10 @@
 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>分页查询客户信息</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.js"></script>
 
     <script type="text/javascript" >
@@ -39,8 +43,14 @@
                     "pageSize":5
                 } ,
                 "success":function(data){
-                     totalPage = data.pageBean.totalPage;
+                    totalPage = data.pageBean.totalPage;
                     var tr = "";
+
+                    if (data.pageBean.total==0){
+                        tr  +='<tr><th>查询无果</th></tr>'
+                    }else{
+
+
                     $.each(data.customers,function (i,n) {
                         tr += "<tr>";
                         tr += '     <td>'+n.identity+'</td>         ';
@@ -53,14 +63,21 @@
                         tr += '    <td> <a href="javascript:void(0);" onclick="deleteCustomer('+n.id+');">删除</a></td>';
                         tr += '</tr>                     ';
                     });
+                    }
+
                     var footer = "";
                     footer += '<tr>                                                                       ';
-                    footer += '	<td style="text-align:right; padding-right:10px; padding:5px" colspan="4"> ';
+                    footer += '	<td style="text-align:right; padding-right:10px; padding:5px" colspan="2"> ';
+                    footer +='<span>共'+data.pageBean.total+'条纪录，' +
+                        '当前第'+data.pageBean.currentPage+'/'+data.pageBean.totalPage+'页，' +
+                        '每页'+data.pageBean.pageSize+'条纪录</span></td>';
+                    footer +='	<td style="text-align:right; padding-right:10px; padding:5px" colspan="2"></td>'
+                    footer +='	<td style="text-align:right; padding-right:10px; padding:5px" colspan="4">'
                     if(data.pageBean.currentPage != 1){
                         footer += '		<input type="button" value="首页" onclick="firstPage();"/>&nbsp;&nbsp;';
                         footer += '		<input type="button" value="上一页" onclick="prePage();"/>&nbsp;&nbsp;';
                     }
-                    if(data.pageBean.currentPage != data.totalPages){
+                    if(data.pageBean.currentPage != data.pageBean.totalPage){
                         footer += '		<input type="button" value="下一页" onclick="nextPage();"/>&nbsp;&nbsp;';
                         footer += '		<input type="button" value="尾页" onclick="lastPage();"/>&nbsp;&nbsp;';
                     }
@@ -135,7 +152,7 @@
      </script>
 </head>
 <body>
-<table>
+<table class="table table-hover" width="80%">
      <tr>
          <th>身份证</th>
          <th>姓名</th>

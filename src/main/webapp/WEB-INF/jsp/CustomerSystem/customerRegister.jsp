@@ -1,3 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page isELIgnored="false" %>
 <%--
   Created by IntelliJ IDEA.
   User: Administrator
@@ -5,12 +9,21 @@
   Time: 15:16
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>信息验证</title>
-    <script type="text/javascript" src="">
-
+    <style type="text/css">
+        .red{
+            color: red;
+        }
+        .green{
+            color: green;
+        }
+    </style>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/customers.js">
+    </script>
+    <script type="text/javascript" >
 
     </script>
 </head>
@@ -23,14 +36,14 @@
                 身份证&nbsp;
             </td>
             <td width="15%">
-                <input type="text" name="identity" id="identity">
+                <input type="text" name="identity" id="identity" onblur="checkIdentity();">
             </td>
             <td width="25%"><span id="identitySpan">&nbsp;</span></td>
             <td width="10%">
                 姓名&nbsp;
             </td>
             <td width="15%">
-                <input type="text" name="custName" id="custName">
+                <input type="text" name="custName" id="custName" onblur="checkCustName();">
             </td>
             <td><span id="custNameSpan">&nbsp;</span></td>
         </tr>
@@ -47,7 +60,7 @@
                 电话&nbsp;
             </td>
             <td>
-                <input type="text" name="phone" id="phone">
+                <input type="text" name="phone" id="phone" onblur="checkPhone();">
             </td>
             <td><span id="phoneSpan">&nbsp;</span></td>
         </tr>
@@ -63,7 +76,10 @@
                 性别
             </td>
             <td>
-                <input type="text" name="gender" id="gender">
+                <select name="gender" id="gender" style="width: 100%">
+                    <option value="男">男</option>
+                    <option value="女">女</option>
+                </select>
             </td>
             <td><span id="genderSpan">&nbsp;</span></td>
         </tr>
@@ -72,9 +88,9 @@
                 密码&nbsp;
             </td>
             <td>
-                <input type="password" name="password" id="password">
+                <input type="password" name="password" id="password" onblur="checkPassword();">
             </td>
-            <td><span id="passwordSpan">&nbsp;</span></td>
+            <td><span id="passwordSpan">密码为6-11位，且必须有英文</span></td>
             <td colspan="2">&nbsp;</td>
 
         </tr>

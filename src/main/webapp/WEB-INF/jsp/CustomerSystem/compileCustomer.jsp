@@ -15,6 +15,9 @@
                  $("#cid").val(cid) ;
                  $("#modifyPwd").submit();
              }
+             $(function () {
+                   $("#gender").val(${modifyCustomer.gender})
+             });
     </script>
 </head>
 <body>
@@ -33,6 +36,7 @@
             姓名&nbsp;
         </td>
         <td width="15%">
+
             <input type="text" name="custName" id="custName" value="${modifyCustomer.custName}">
         </td>
         <td><span id="custNameSpan">&nbsp;</span></td>
@@ -66,7 +70,10 @@
             性别
         </td>
         <td>
-            <input type="text" name="gender" id="gender" value="${modifyCustomer.gender}">
+            <select name="gender" id="gender" style="width: 100%">
+                <option value="男">男</option>
+                <option value="女">女</option>
+            </select>
         </td>
         <td><span id="genderSpan">&nbsp;</span></td>
     </tr>

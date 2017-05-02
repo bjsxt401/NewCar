@@ -60,7 +60,10 @@
                     性别
                 </td>
                 <td>
-                    <input type="text" name="gender" id="gender">
+                    <select name="gender" id="gender" style="width: 100%">
+                        <option value="男">男</option>
+                        <option value="女">女</option>
+                    </select>
                 </td>
                 <td><span id="genderSpan">&nbsp;</span></td>
             </tr>
