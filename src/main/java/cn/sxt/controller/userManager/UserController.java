@@ -40,6 +40,6 @@ public class UserController {
             e.printStackTrace();
         }
 
-        return " commons/main";
+        return "commons/main";
    }
 }
