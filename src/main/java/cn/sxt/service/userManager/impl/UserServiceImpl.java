@@ -1,6 +1,7 @@
 package cn.sxt.service.userManager.impl;
 
 import cn.sxt.entity.Users;
+import cn.sxt.exception.service.ServiceException;
 import cn.sxt.mapper.UserMapper;
 import cn.sxt.service.userManager.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public Users loginByUserNameAndUserPswd(Users user) {
+    public Users loginByUserNameAndUserPswd(Users user) throws ServiceException{
         return this.userMapper.getUserByUser(user);
     }
 }
