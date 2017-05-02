@@ -63,7 +63,7 @@
             <span><img src="images/leftico02.png" /></span>客户管理
         </div>
         <ul class="menuson">
-            <li><cite></cite><a href="#">添加客户信息</a><i></i></li>
+            <li><cite></cite><a href="customerSystem/customerRegister.action">添加客户信息</a><i></i></li>
             <li><cite></cite><a href="#">查询客户信息</a><i></i></li>
         </ul>
     </dd>
