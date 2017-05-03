@@ -1,4 +1,4 @@
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: beichunming
@@ -8,7 +8,6 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isELIgnored="false" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
@@ -44,16 +43,16 @@
 </head>
 
 <body>
-<form action="user/register.action" method="post">
-    <input type="hidden" name="method" value="addUser"/>
+<form action="user/queryUser.action" method="post">
+    <input type="hidden" name="method" value="findUser"/>
     <table width="100%" border="0" cellpadding="0" cellspacing="0">
         <tr>
             <td width="17" valign="top" background="images/mail_leftbg.gif"><img src="images/left-top-right.gif" width="17" height="29" /></td>
             <td valign="top" background="images/content-bg.gif"><table width="100%" height="31" border="0" cellpadding="0" cellspacing="0" class="left_topbg" id="table2">
                 <tr>
-                    <td height="31"><div class="titlebt">添加用户</div></td>
+                    <td height="31"><div class="titlebt">查询用户</div></td>
                 </tr>
-            </table>
+            </table></td>
             <td width="16" valign="top" background="images/mail_rightbg.gif"><img src="images/nav-right-bg.gif" width="16" height="29" /></td>
         </tr>
         <tr>
@@ -74,8 +73,6 @@
       <td width="48%"><input type="text" name="identity" id="identity">*</td>
     </tr>
     <tr>
-      <td><div align="center" class="left_txt">用户密码</div></td>
-      <td><input type="password" name="userPwd" id="userPwd" size="21" >*</td>
        <td><div align="center" class="left_txt">联系电话</div></td>
       <td><input type="text" name="phone" id="phone">*</td>
 
@@ -117,14 +114,14 @@
 	<tr>
 		<td height="107">
 		<div align="center">
-		<img  src="images/carimg/ok.gif" onclick="subForm()" style="cursor: hand;">
+		<img  src="<%=basePath%>images/carimg/ok.gif" onclick="subForm()" style="cursor: hand;">
 		 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		 <img  src="images/carimg/reset.gif" onclick="reset()" style="cursor: hand;">
+		 <img  src="<%=basePath%>images/carimg/reset.gif" onclick="reset()" style="cursor: hand;">
 		</div>
 	  </td>
 	</tr>
 	<tr>
-		<td height="30" background="images/tab/bg.gif"></td>
+		<td height="30" background="<%=basePath%>images/tab/bg.gif"></td>
 	</tr>
 </table>
 </span>

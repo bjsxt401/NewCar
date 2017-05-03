@@ -53,7 +53,7 @@
         </div>
         <ul class="menuson">
             <li><cite></cite><a href="user/addUser.action" target="rightFrame">添加用户</a><i></i></li>
-            <li class="active"><cite></cite><a href="right.html" target="rightFrame">查询用户</a><i></i></li>
+            <li class="active"><cite></cite><a href="user/findUser.action" target="rightFrame">查询用户</a><i></i></li>
         </ul>
     </dd>
 

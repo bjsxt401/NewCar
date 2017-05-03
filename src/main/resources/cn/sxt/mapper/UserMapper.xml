@@ -4,10 +4,49 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.sxt.mapper.UserMapper">
 
+
+    <!--login by userName and password-->
     <select id="getUserByUser" resultType="cn.sxt.entity.Users">
           SELECT uid,username AS userName,identity,fullname AS fullName,gender,
           address,phone,roleid,userpwd AS userPwd,position FROM users
           WHERE username=#{userName} AND userpwd=#{userPwd}
     </select>
+    <!--user register-->
+    <insert id="addUser">
+        INSERT  INTO users (username,identity,fullname,gender,address,phone,roleid,userpwd,position) VALUES(#{userName},#{identity},#{fullName},#{gender},#{address},#{phone},#{roleid},#{userPwd},#{position})
+    </insert>
 
+    <!--select user by condition-->
+    <select id="selectUsersByUser" resultType="cn.sxt.entity.Users">
+        SELECT uid,username AS userName,identity,fullname AS fullName,gender,
+          address,phone,roleid,userpwd AS userPwd,position FROM users
+           <where>
+               <if test="userName!=null and userName!=''">
+                   AND username LIKE CONCAT('%','#{userName}','%')
+               </if>
+               <if test="identity!=null and identity!=''">
+                   AND identity LIKE CONCAT('%','#{identity}','%')
+               </if>
+               <if test="fullName!=null  and fullName!=''">
+               AND fullname LIKE CONCAT('%','#{fullName}','%')
+           </if>
+               <if test="gender!=null and gender!=''">
+               AND gender =#{gender}
+           </if>
+               <if test="address!=null and address!=''">
+               AND address LIKE CONCAT('%','#{address}','%')
+           </if>
+               <if test="phone!=null and phone!=''">
+               AND phone LIKE CONCAT('%','#{phone}','%')
+           </if>
+               <if test="roleid!=0">
+               AND roleid =#{roleid}
+           </if>
+               <if test="position!=null and position!=''">
+               AND position LIKE CONCAT('%','#{position}','%')
+           </if>
+
+           </where>
+
+    </select>
 </mapper>

@@ -1,6 +1,7 @@
 package cn.sxt.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by beichunming on 2017/4/28.
@@ -149,4 +150,5 @@ public class Users implements Serializable{
     public void setPosition(String position) {
         this.position = position;
     }
+
 }
