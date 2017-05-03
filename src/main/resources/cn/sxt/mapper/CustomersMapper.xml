@@ -88,8 +88,9 @@
         update customers set password = #{password} where cid = #{id}
 
     </update>
-    <select id="selectIdentity" resultType="boolean">
-         select * from customers where identity = #{identity}
+    <select id="selectIdentity" resultType="java.lang.Integer">
+        select count(*) from customers where identity = #{identity}
     </select>
+
 </mapper>
 

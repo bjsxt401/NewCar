@@ -89,8 +89,13 @@ public class CustomersServiceImpl implements CustomersService {
         this.customersMapper.deleteCustomer(cid);
     }
 
+    /**
+     * 查询证件号是否存在
+     * @param identity
+     * @return
+     */
     public boolean selectIdentity(String identity) {
-          boolean result =    this.customersMapper.selectIdentity(identity);
-        return result;
+          Integer result = this.customersMapper.selectIdentity(identity);
+        return result==1?true:false;
     }
 }

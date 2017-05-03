@@ -28,7 +28,6 @@
             var result = checkIdentity();
             var span = $("#identitySpan");
             if(result){
-
                 $.ajax({
                     "method":"post",
                     "url":"/newcar/customer/selectIdentity.action" ,
@@ -43,7 +42,6 @@
                         }else{
                             span.attr("class","green");
                             span[0].innerHTML="该证件号尚未被注册";
-
                         }
                     }
                 });
