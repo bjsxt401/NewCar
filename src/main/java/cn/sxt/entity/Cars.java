@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * Created by Administrator on 2017/5/3.
  */
-public class cars implements Serializable {
+public class Cars implements Serializable {
     private Integer carId;   //车的id
     private String carNumber; //车的牌照号
     private String carType; //车的品牌
@@ -90,7 +90,7 @@ public class cars implements Serializable {
 
     @Override
     public String toString() {
-        return "cars{" +
+        return "Cars{" +
                 "carId=" + carId +
                 ", carNumber='" + carNumber + '\'' +
                 ", carType='" + carType + '\'' +
@@ -108,7 +108,7 @@ public class cars implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        cars cars = (cars) o;
+        Cars cars = (Cars) o;
 
         if (carId != null ? !carId.equals(cars.carId) : cars.carId != null) return false;
         if (carNumber != null ? !carNumber.equals(cars.carNumber) : cars.carNumber != null) return false;
@@ -135,7 +135,7 @@ public class cars implements Serializable {
         return result;
     }
 
-    public cars(Integer carId, String carNumber, String carType, String color, String price, String rentPrice, String deposit, String isrenting, String description) {
+    public Cars(Integer carId, String carNumber, String carType, String color, String price, String rentPrice, String deposit, String isrenting, String description) {
         this.carId = carId;
         this.carNumber = carNumber;
         this.carType = carType;
@@ -147,7 +147,7 @@ public class cars implements Serializable {
         this.description = description;
     }
 
-    public cars() {
+    public Cars() {
     }
 }
 
