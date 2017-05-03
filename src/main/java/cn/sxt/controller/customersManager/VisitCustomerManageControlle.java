@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 @RequestMapping("/customerSystem")
-public class TestCustomerControlle {
+public class VisitCustomerManageControlle {
     @RequestMapping("/{path}")
     public String go(@PathVariable("path")String path){
         return "CustomerSystem/"+path;

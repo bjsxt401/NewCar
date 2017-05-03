@@ -24,7 +24,40 @@
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/customers.js">
     </script>
     <script type="text/javascript" >
+        function checkIdentityAndGender(){
+            var result = checkIdentity();
+            var span = $("#identitySpan");
+            if(result){
 
+                $.ajax({
+                    "method":"post",
+                    "url":"/newcar/customer/selectIdentity.action" ,
+                    "data":{
+                        "identity":$("#identity").val()
+                    } ,
+                    "success":function (data) {
+                        if(data.result){
+                            span.attr("class","red");
+                            span[0].innerHTML="该证件号已被注册";
+
+                        }else{
+                            span.attr("class","green");
+                            span[0].innerHTML="该证件号尚未被注册";
+
+                        }
+                    }
+                });
+            }
+        }
+        function checkSubmit() {
+            var result1 = checkPassword();
+            var result2 = checkIdentity();
+            var result3 = checkCustName();
+            var result4 = checkPhone();
+            if(((result1&&result2)&&result3)&&result4){
+                $("#compileCustomer").submit();
+            }
+        }
     </script>
 </head>
 <body>
@@ -36,7 +69,7 @@
                 身份证&nbsp;
             </td>
             <td width="15%">
-                <input type="text" name="identity" id="identity" onblur="checkIdentity();">
+                <input type="text" name="identity" id="identity" onblur="checkIdentityAndGender();">
             </td>
             <td width="25%"><span id="identitySpan">&nbsp;</span></td>
             <td width="10%">
@@ -95,7 +128,7 @@
 
         </tr>
         <tr>
-            <td><input type="submit" value="确定"></td>
+            <td><input type="button" value="确定" onclick="checkSubmit();"></td>
             <td><input type="reset" value="重置"></td>
             <td></td>
         </tr>
