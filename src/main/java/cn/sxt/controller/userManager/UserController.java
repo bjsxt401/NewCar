@@ -3,16 +3,18 @@ package cn.sxt.controller.userManager;
 import cn.sxt.entity.Role;
 import cn.sxt.entity.Users;
 import cn.sxt.service.userManager.UserService;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by beichunming on 2017/4/28.
@@ -88,18 +90,54 @@ public class UserController {
 
    }
 
+    /**
+     * 用户查询页跳转，传 user 对象，
+     * @param user
+     * @param request
+     * @return
+     */
    @RequestMapping(value = "/queryUser",method = {RequestMethod.POST})
     public String queryUserByUser(Users user,HttpServletRequest request){
        System.out.println("user-----------======="+user);
-        List<Users>usersList = null;
-        try {
-            usersList = this.userService.getUsersByUser(user);
-
-            System.out.println("usersList============"+usersList);
-        }   catch (Exception e){
-            e.printStackTrace();
-        }
-
-        return null;
+       HttpSession session = request.getSession();
+       session.setAttribute("queryUser",user);
+        return "forward:/user/userListPage.action";
    }
+
+
+    /**
+     * 分页查询
+     * @param request
+     */
+   @RequestMapping(value = "/displayUserList",method = {RequestMethod.POST,RequestMethod.GET})
+   @ResponseBody
+    public String displayUserList(HttpServletRequest request){
+       // get the selected user
+       Users user = (Users) request.getSession().getAttribute("queryUser");
+       //直接返回前台
+       String draw = request.getParameter("draw");
+       //数据起始位置
+       String startIndex = request.getParameter("startIndex");
+       //数据长度
+       String pageSize = request.getParameter("pageSize");
+
+       System.out.println("user++--==="+user+"draw===="+draw+"startIndex====="+startIndex+"pageSize===="+pageSize);
+//       //定义列名
+//       String[] cols = {"uid","loginame", "identity","fullname","position","gender","role",};
+
+
+       Map<String,Object> usersResult = null;
+       try {
+           usersResult = this.userService.getUsersListByPage(draw,Integer.parseInt(startIndex),Integer.parseInt(pageSize),user);
+           String json = new Gson().toJson(usersResult);
+           System.out.println("usersResult======="+usersResult);
+           return new ObjectMapper().writeValueAsString(usersResult);
+           
+
+       }   catch (Exception e){
+           e.printStackTrace();
+       }
+       return null;
+   }
+
 }
