@@ -7,7 +7,6 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isELIgnored="false" %>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
@@ -38,26 +37,54 @@
     <script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript">
         function subForm(){
-            document.forms[0].submit();
-        }
-        function changeUserPwd(){
-           window.location.href="user/toChangeUserPwsd.action?uid="+${requestScope.updateUser.uid};
-        }
+            var obj = document.getElementById('userPwd');
+            var newPwd = document.getElementById('newUserPwd');
+            var okNewPwd = document.getElementById('okNewPwd');
+            var oldPwd = document.getElementById('oldPwd');
+            if(oldPwd.value == null || oldPwd.value == ""){
+                alert("请输入旧密码");
+                oldPwd.select();
+                return false;
+            }else if(newPwd.value == null || newPwd.value == ""){
+                alert("请输入新密码");
+                newPwd.select();
+                return false;
+            }else if(okNewPwd.value == null || okNewPwd.value == ""){
+                alert("请再次输入密码");
+                okNewPwd.select();
+                return false;
+            }else{
+                if(newPwd.value == okNewPwd.value){
+                    if(oldPwd.value == obj.value){
+                        document.forms[0].submit();
+                    }else{
+                        alert("旧密码有误请重新输入");
+                        oldPwd.select();
+                        return false;
+                    }
 
+                }else{
+                    alert("您输入的密码不一致，请重新输入。");
+                    newPwd.value = "";
+                    okNewPwd.value = "";
+                    return ;
+                }
+            }
+        }
     </script>
 </head>
 
 <body>
-<form action="user/doUpdateUser.action" method="post">
-    <input type="hidden" name="method" value="updateUser" id="method"/>
-    <input type="hidden" name="userPwd" value="${requestScope.updateUser.userPwd}"/>
-    <input type="hidden" name="uid" value="${requestScope.updateUser.uid}"/>
+<form action="user/doChangeUserPwd.action" method="post">
+    <input type="hidden" name="method" value="changeUserPwd"/>
+    <input type="hidden" name="userPwd" value="${requestScope.changedUser.userPwd }" id="userPwd"/>
+    <input type="hidden" name="userName" value="${requestScope.changedUser.userName }" id="userName"/>
     <table width="100%" border="0" cellpadding="0" cellspacing="0">
         <tr>
             <td width="17" valign="top" background="images/mail_leftbg.gif"><img src="images/left-top-right.gif" width="17" height="29" /></td>
             <td valign="top" background="images/content-bg.gif"><table width="100%" height="31" border="0" cellpadding="0" cellspacing="0" class="left_topbg" id="table2">
                 <tr>
-                    <td height="31"><div class="titlebt">更新用户</div></td>
+                    <td height="31"><div class="titlebt">修改密码</div></td>
                 </tr>
             </table></td>
             <td width="16" valign="top" background="images/mail_rightbg.gif"><img src="images/nav-right-bg.gif" width="16" height="29" /></td>
@@ -74,62 +101,18 @@
                     <td colspan="2" valign="top"><span class="left_bt">
      	<table width="100%" border="0" cellpadding="0" cellspacing="0">
      		 <tr>
-      <td width="14%"><div align="center" class="left_txt">登录名</div></td>
-      <td width="23%"><input type="text" name="userName" id="userName" value="${requestScope.updateUser.userName }" readonly="readonly"></td>
-      <td width="15%"><div align="center" class="left_txt">身份证</div></td>
-      <td width="48%"><input type="text" name="identity" id="identity"  value="${requestScope.updateUser.identity }">*</td>
-    </tr>
-    <tr>
-       <td><div align="center" class="left_txt">联系电话</div></td>
-      <td><input type="text" name="phone" id="phone" value="${requestScope.updateUser.phone }">*</td>
-         <td><div align="center" class="left_txt">姓名</div></td>
-      <td><input type="text" id="fullName" name="fullName" value="${requestScope.updateUser.fullName }">*</td>
-    </tr>
-    <tr>
-      <td><div align="center" class="left_txt">地址</div></td>
-      <td><input type="text" name="address" id="address" value="${requestScope.updateUser.address }">*</td>
-     <td><div align="center" class="left_txt">性别</div></td>
-      <td>
-     <select NAME="gender" id="sex" style="width: 105px;">
-			<c:choose>
-                <c:when test="${requestScope.updateUser.gender eq '男'}">
-                    <option value="男" selected="selected">男</option>
-                    <option value="女">女</option>
-                </c:when>
-                <c:otherwise>
-                    <option value="男" >男</option>
-                    <option value="女" selected="selected">女</option>
-                </c:otherwise>
-            </c:choose>
-		</select>
-
-      </td>
-
-    </tr>
-    <tr>
-      <td><div align="center" class="left_txt">职位 </div></td>
-      <td><input type="text" name="position" id="position" value="${requestScope.updateUser.position }">*</td>
-      <td><div align="center" class="left_txt">用户类型</div></td>
-      <td><label>
-         <select name="roleid">
-        <c:forEach items="${sessionScope.roleList}" var="r">
-            <c:choose>
-                <c:when test="${requestScope.updateUser.roleid == r.roleid}">
-                    <option  value="${r.roleid }" selected>${r.roleName }</option>
-                </c:when>
-                <c:otherwise>
-                    <option  value="${r.roleid }">${r.roleName }</option>
-                </c:otherwise>
-            </c:choose>
-        </c:forEach>
-        </select>
-      </label></td>
-    </tr>
-    <tr>
-
-
-    </tr>
-     	</table>
+      <td width="14%"><div align="right" class="left_txt">旧密码：</div></td>
+      <td width="23%"><input name="oldPwd" type="password"  id="oldPwd">*</td>
+      </tr>
+     	 <tr>
+      <td width="14%"><div align="right" class="left_txt">新密码：</div></td>
+      <td width="23%"><input name="newUserPwd" type="password" id="newUserPwd" >* &nbsp;&nbsp;<span style="font-size: 12px;color: #1F4A65;">新密码不能小于四位</span></td>
+      </tr>
+     	 <tr>
+      <td width="14%"><div align="right" class="left_txt">确认新密码：</div></td>
+      <td width="23%"><input name="okNewPwd" type="password" id="okNewPwd" >*</td>
+      </tr>
+   </table>
     <table align="left" width="100%">
 	<tr>
 		<td height="107">
@@ -137,8 +120,6 @@
 		<img  src="<%=basePath%>images/carimg/ok.gif" onclick="subForm()" style="cursor: hand;">
 		 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		 <img  src="<%=basePath%>images/carimg/reset.gif" onclick="reset()" style="cursor: hand;">
-		 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		  <img  src="<%=basePath%>images/carimg/changepw.gif" onclick="changeUserPwd()" style="cursor: hand;">
 		</div>
 	  </td>
 	</tr>

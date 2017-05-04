@@ -150,8 +150,18 @@
                <if test="position!=null and position!=''">
                     position =#{position},
                </if>
+               <if test="userPwd!=null and userPwd!=''">
+                   userpwd=#{userPwd},
+               </if>
            </set>
-        WHERE uid = #{uid}
+       <where>
+           <if test="uid!=0 and uid!=null">
+                AND uid = #{uid}
+           </if>
+           <if test="userName!='' and userName!=null">
+               AND username = #{userName}
+           </if>
+       </where>
     </update>
     <!--删除用户-->
     <delete id="deleteUser">

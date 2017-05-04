@@ -50,18 +50,23 @@ public class UserController {
             user.setUserName(userName);
             user.setUserPwd(userPwd);
             Users users = this.userService.loginByUserNameAndUserPswd(user);
-            //把登录的用户信息存入到session
-            HttpSession session = request.getSession();
-            session.setAttribute("loginUser",users);
-            //获取所有的角色信息,并存入到session中
-            List<Role> roleList = this.userService.getAllRole();
-            session.setAttribute("roleList",roleList);
+            if (users!=null){
+                //把登录的用户信息存入到session
+                HttpSession session = request.getSession();
+                session.setAttribute("loginUser",users);
+                //获取所有的角色信息,并存入到session中
+                List<Role> roleList = this.userService.getAllRole();
+                session.setAttribute("roleList",roleList);
+                return "redirect:/dispatcher/main.action";
+            }
+            
+
             //System.out.println("users+====="+users+"roleList======="+roleList);
         }   catch (Exception e){
             e.printStackTrace();
         }
 
-        return "redirect:/dispatcher/main.action";
+        return "redirect:/login.jsp";
    }
     
 
@@ -185,6 +190,46 @@ public class UserController {
        }
          return null;
    }
+
+    /**
+     * 于，，预修改，获取要修改的user的对象
+     * @param uid
+     * @param request
+     * @return
+     */
+   @RequestMapping(value = "/toChangeUserPwsd")
+   public  String   toChangeUserPwsd(@RequestParam("uid")Integer uid,HttpServletRequest request){
+       try {
+           Users user = new Users();
+           user.setUid(uid);
+           Users changedUser = this.userService.getUsersByUser(user);
+           request.setAttribute("changedUser",changedUser);
+           return "forward:/user/changeUserPwd.action";
+       }   catch (Exception e){
+           e.printStackTrace();
+       }
+       return null;
+   }
+
+    /**
+     * 修改密码
+     * @param
+     * @return
+     */
+   @RequestMapping(value = "/doChangeUserPwd",method = {RequestMethod.POST})
+   public String doChangeUserPwd(@RequestParam("newUserPwd")String newUserPwd,@RequestParam("userName")String userName){
+       try {
+           Users user = new Users();
+           user.setUserPwd(newUserPwd);
+           user.setUserName(userName);
+           this.userService.updateUser(user);
+           return "redirect:/user/findUser.action";
+       }   catch (Exception e){
+           e.printStackTrace();
+       }
+       return null;
+   }
+
 
     /**
      * 向jsp userSystem中跳转
