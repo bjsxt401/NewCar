@@ -15,6 +15,7 @@ public class Users implements Serializable{
     private String   address;
     private String   phone;
     private Integer  roleid;
+    private String roleName;
     private  String  userPwd;
     private  String  position;
 
@@ -33,6 +34,7 @@ public class Users implements Serializable{
         if (getAddress() != null ? !getAddress().equals(users.getAddress()) : users.getAddress() != null) return false;
         if (getPhone() != null ? !getPhone().equals(users.getPhone()) : users.getPhone() != null) return false;
         if (getRoleid() != null ? !getRoleid().equals(users.getRoleid()) : users.getRoleid() != null) return false;
+        if (getRoleName() != null ? !getRoleName().equals(users.getRoleName()) : users.getRoleName() != null) return false;
         if (getUserPwd() != null ? !getUserPwd().equals(users.getUserPwd()) : users.getUserPwd() != null) return false;
         return getPosition() != null ? getPosition().equals(users.getPosition()) : users.getPosition() == null;
     }
@@ -47,6 +49,7 @@ public class Users implements Serializable{
         result = 31 * result + (getAddress() != null ? getAddress().hashCode() : 0);
         result = 31 * result + (getPhone() != null ? getPhone().hashCode() : 0);
         result = 31 * result + (getRoleid() != null ? getRoleid().hashCode() : 0);
+        result = 31 * result + (getRoleName() != null ? getRoleName().hashCode() : 0);
         result = 31 * result + (getUserPwd() != null ? getUserPwd().hashCode() : 0);
         result = 31 * result + (getPosition() != null ? getPosition().hashCode() : 0);
         return result;
@@ -63,6 +66,7 @@ public class Users implements Serializable{
                 ", address='" + address + '\'' +
                 ", phone='" + phone + '\'' +
                 ", roleid=" + roleid +
+                ", roleName='" + roleName + '\'' +
                 ", userPwd='" + userPwd + '\'' +
                 ", position='" + position + '\'' +
                 '}';
@@ -151,4 +155,11 @@ public class Users implements Serializable{
         this.position = position;
     }
 
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
+    }
 }

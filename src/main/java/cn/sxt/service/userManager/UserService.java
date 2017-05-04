@@ -6,6 +6,7 @@ import cn.sxt.exception.service.ServiceException;
 
 import javax.sql.rowset.serial.SerialException;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by beichunming on 2017/4/28.
@@ -18,4 +19,6 @@ public interface UserService {
     void registerUser(Users user) throws ServiceException;
 
     List<Users> getUsersByUser(Users user) throws ServiceException;
+
+    Map<String,Object> getUsersListByPage(String draw,Integer startIndex,Integer pageSize,Users user) throws ServiceException;
 }

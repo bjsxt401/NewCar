@@ -49,4 +49,74 @@
            </where>
 
     </select>
+<!--分页查询结果-->
+    <select id="getUserByPage" resultType="Users">
+        SELECT uid,username AS userName,identity,fullname AS fullName,gender,
+        address,phone,u.roleid,r.rolename AS roleName,userpwd AS userPwd,position FROM users u
+        LEFT JOIN roles r
+        ON  u.roleid = r.roleid
+        <if test="user!=null">
+            <where>
+                <if test="user.userName!=null  and user.userName!=''">
+                    AND username LIKE CONCAT('%',#{user.userName},'%')
+                </if>
+                <if test="user.identity!=null  and user.identity!=''">
+                    AND identity LIKE CONCAT('%',#{user.identity},'%')
+                </if>
+                <if test="user.fullName!=null and user.fullName!=''">
+                    AND fullname LIKE CONCAT('%',#{user.fullName},'%')
+                </if>
+                <if test="user.gender!=null and user.gender!=''">
+                    AND gender=#{user.gender}
+                </if>
+                <if test="user.address!=null and user.address!=''">
+                    AND address LIKE CONCAT('%',#{user.address},'%')
+                </if>
+                <if test="user.phone!=null and user.phone!=''">
+                    AND phone LIKE CONCAT('%',#{user.phone},'%')
+                </if>
+                <if test="user.roleid!=0">
+                    AND r.roleid=#{user.roleid}
+                </if>
+                <if test="user.position!=null and user.position!=''">
+                    AND position LIKE CONCAT('%',#{user.position},'%')
+                </if>
+            </where>
+        </if>
+
+        ORDER BY uid ASC
+        limit #{start},#{pageSize}
+    </select>
+    <!--符合条件的用户个数-->
+    <select id="getUserCounts" resultType="java.lang.Integer">
+        SELECT count(uid) FROM users
+        <if test="user!=null">
+            <where>
+                <if test="user.userName!=null  and user.userName!=''">
+                    AND username LIKE CONCAT('%',#{user.userName},'%')
+                </if>
+                <if test="user.identity!=null  and user.identity!=''">
+                    AND identity LIKE CONCAT('%',#{user.identity},'%')
+                </if>
+                <if test="user.fullName!=null and user.fullName!=''">
+                    AND fullname LIKE CONCAT('%',#{user.fullName},'%')
+                </if>
+                <if test="user.gender!=null and user.gender!=''">
+                    AND gender=#{user.gender}
+                </if>
+                <if test="user.address!=null and user.address!=''">
+                    AND address LIKE CONCAT('%',#{user.address},'%')
+                </if>
+                <if test="user.phone!=null and user.phone!=''">
+                    AND phone LIKE CONCAT('%',#{user.phone},'%')
+                </if>
+                <if test="user.roleid!=0">
+                    AND roleid=#{user.roleid}
+                </if>
+                <if test="user.position!=null and user.position!=''">
+                    AND position LIKE CONCAT('%',#{user.position},'%')
+                </if>
+            </where>
+        </if>
+    </select>
 </mapper>

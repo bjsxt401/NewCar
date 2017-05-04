@@ -9,7 +9,9 @@ import cn.sxt.service.userManager.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by beichunming on 2017/4/28.
@@ -67,6 +69,38 @@ public class UserServiceImpl implements UserService{
     @Override
     public List<Users> getUsersByUser(Users user) throws ServiceException {
         return this.userMapper.selectUsersByUser(user);
+    }
+
+
+    /**
+     *  返回分页查询返回的结果
+     * @param draw
+     * @param index
+     * @param pageSize
+     * @param user
+     * @return
+     * @throws ServiceException
+     */
+    @Override
+    public Map<String, Object> getUsersListByPage(String draw,Integer index,Integer pageSize,Users user) throws ServiceException {
+        Map<String,Object> params = new HashMap<String,Object>();
+        if(index == null)
+            index = 1;
+        if(pageSize == null)
+            pageSize = 3;
+        params.put("start", index);
+        params.put("pageSize", pageSize);
+        params.put("user",user);
+        List<Users> list = this.userMapper.getUserByPage(params);
+
+        int totalCounts = this.userMapper.getUserCounts(params);
+
+        Map<String, Object> info = new HashMap<String, Object>();
+        info.put("pageData", list);
+        info.put("total", totalCounts);
+        info.put("draw", draw);
+
+        return info;
     }
 
     /**
