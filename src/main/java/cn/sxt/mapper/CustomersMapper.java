@@ -26,4 +26,6 @@ public interface CustomersMapper {
     void modifyCustomerPwd(Customers customer);
     //查询证件号是否被注册
     Integer selectIdentity(String identity);
+    //根据证件号查询cid
+    Integer selectCidByIdentity(String identity);
 }

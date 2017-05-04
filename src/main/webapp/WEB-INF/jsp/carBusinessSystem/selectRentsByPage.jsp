@@ -8,24 +8,9 @@
 <head>
     <base href="<%=basePath%>">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Title</title>
+    <title>查询出租单信息</title>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/My97DatePicker/WdatePicker.js"></script>
-    <script type="text/javascript" >
-         function initPrice(){
-
-             var shouldReturnDate = new Date($("#shouldReturnDate").val());
-             var beginDate = new Date($("#beginDate").val());
-             var date = (shouldReturnDate- beginDate)/(24*60*60*1000);
-             if(date==0){
-                 date = 1;
-             }
-
-            var shouldPayPrice = $("#shouldPayPrice");
-            shouldPayPrice.val(parseFloat(${LeaseCarInf.deposit})+parseFloat(${LeaseCarInf.rentPrice})*date);
-         }
-    </script>
-
 </head>
 <body>
 <form action="/newcar/lease/createRent.action" method="post">
@@ -36,32 +21,30 @@
                 出租单编号
             </td>
             <td width="30%">
-                <input type="text" name="tableId" id="tableId" readonly="readonly" value="${tableId}">
-                <input type="hidden" name="carId" value="${LeaseCarInf.carId}">
-                <input type="hidden" name="cId" value="${LeaseCustomerId}">
+                <input type="text" name="tableId" id="tableId" readonly="readonly" >
             </td>
             <td>
-                应付金
+                归还日期
             </td>
             <td>
-                <input type="text" name="shouldPayPrice" id="shouldPayPrice" readonly="readonly">
-
+                <input type="text" name="returnDate" id="returnDate"
+                       class="Wdate" onclick="WdatePicker();"  >
             </td>
-        </tr>
+        </tr>           
         <tr>
             <td>
                 起租日期
             </td>
             <td>
                 <input type="text" name="beginDate" id="beginDate"
-                       class="Wdate" onclick="WdatePicker();" value="${beginDate}" >
+                       class="Wdate" onclick="WdatePicker();" >
             </td>
             <td>
                 应归还日期
             </td>
             <td>
                 <input type="text" name="shouldReturnDate" id="shouldReturnDate"
-                       class="Wdate" onclick="WdatePicker();" onchange="initPrice();" >
+                       class="Wdate" onclick="WdatePicker();" >
             </td>
         </tr>
         <tr>
@@ -78,7 +61,7 @@
                 车号
             </td>
             <td>
-                <input type="text" name="carNumber" id="carNumber" value="${LeaseCarInf.carNumber}" >
+                <input type="text" name="carNumber" id="carNumber"  >
             </td>
 
         </tr>
@@ -87,14 +70,13 @@
                 客户编号
             </td>
             <td>
-                <input type="text"  readonly="readonly" value="${LeaseCustomerIdentity}" >
+                <input type="text"   >
             </td>
             <td>
                 服务人员编号
             </td>
             <td>
-                <input type="text" name="username" id="username" readonly="readonly" value="${loginUser.userName}" >
-                <input type="hidden" name="uId"  value="${loginUser.uId}" >
+                <input type="text" name="username" id="username">
             </td>
 
         </tr>

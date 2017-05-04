@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.sxt.mapper.RentMapper">
+    <insert id="createRent">
+            insert into renttable
+              (tableId,shouldPayPrice,beginDate,
+                     shouldReturnDate,rentFlag,cId,uId,carId)
+           VALUES  (#{tableId},#{shouldPayPrice},
+                      str_to_date(#{beginDate},'%Y-%m-%d'),str_to_date(#{shouldReturnDate},'%Y-%m-%d')
+                        ,#{rentFlag},#{cId},#{uid},#{carId})
+    </insert>
+</mapper>
+

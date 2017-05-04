@@ -8,20 +8,48 @@ import java.util.Date;
  */
 public class Rent implements Serializable{
      private String tableId;//    出租单编号
-     private Integer uId;   //    服务人员编号
-     private Integer cId;    //     客户号
-     private Integer carId;    //    车号
-     private Double imprest;    //     预付金
-     private Double shouldPayPrice;//    应付金
-     private Double price;      //实际交付金额    
-     private Date  beginDate ;  //起租日期
-     private Date  shouldReturnDate ;//应归还日期
-     private Date  returnDate ; //实际归还日期
+     private String uId;   //    服务人员编号
+     private String cId;    //     客户号
+     private String carId;    //    车号
+     private String imprest;    //     预付金
+     private String shouldPayPrice;//    应付金
+     private String price;  //实际付款
+     private String  beginDate ;  //起租日期
+     private String  shouldReturnDate ;//应归还日期
+     private String  returnDate ; //实际归还日期
+     private String rentFlag;//订单状态
+     private Cars car;
+     private Customers customers;
+     private Users user;
+
+    public Cars getCar() {
+        return car;
+    }
+
+    public void setCar(Cars car) {
+        this.car = car;
+    }
+
+    public Customers getCustomers() {
+        return customers;
+    }
+
+    public void setCustomers(Customers customers) {
+        this.customers = customers;
+    }
+
+    public Users getUser() {
+        return user;
+    }
+
+    public void setUser(Users user) {
+        this.user = user;
+    }
 
     public Rent() {
     }
 
-    public Rent(String tableId, Integer uId, Integer cId, Integer carId, Double imprest, Double shouldPayPrice, Double price, Date beginDate, Date shouldReturnDate, Date returnDate) {
+    public Rent(String tableId, String uId, String cId, String carId, String imprest, String shouldPayPrice, String price, String beginDate, String shouldReturnDate, String returnDate, String rentFlag) {
         this.tableId = tableId;
         this.uId = uId;
         this.cId = cId;
@@ -32,6 +60,7 @@ public class Rent implements Serializable{
         this.beginDate = beginDate;
         this.shouldReturnDate = shouldReturnDate;
         this.returnDate = returnDate;
+        this.rentFlag = rentFlag;
     }
 
     public String getTableId() {
@@ -42,92 +71,84 @@ public class Rent implements Serializable{
         this.tableId = tableId;
     }
 
-    public Integer getuId() {
+    public String getuId() {
         return uId;
     }
 
-    public void setuId(Integer uId) {
+    public void setuId(String uId) {
         this.uId = uId;
     }
 
-    public Integer getcId() {
+    public String getcId() {
         return cId;
     }
 
-    public void setcId(Integer cId) {
+    public void setcId(String cId) {
         this.cId = cId;
     }
 
-    public Integer getCarId() {
+    public String getCarId() {
         return carId;
     }
 
-    public void setCarId(Integer carId) {
+    public void setCarId(String carId) {
         this.carId = carId;
     }
 
-    public Double getImprest() {
+    public String getImprest() {
         return imprest;
     }
 
-    public void setImprest(Double imprest) {
+    public void setImprest(String imprest) {
         this.imprest = imprest;
     }
 
-    public Double getShouldPayPrice() {
+    public String getShouldPayPrice() {
         return shouldPayPrice;
     }
 
-    public void setShouldPayPrice(Double shouldPayPrice) {
+    public void setShouldPayPrice(String shouldPayPrice) {
         this.shouldPayPrice = shouldPayPrice;
     }
 
-    public Double getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 
-    public Date getBeginDate() {
+    public String getBeginDate() {
         return beginDate;
     }
 
-    public void setBeginDate(Date beginDate) {
+    public void setBeginDate(String beginDate) {
         this.beginDate = beginDate;
     }
 
-    public Date getShouldReturnDate() {
+    public String getShouldReturnDate() {
         return shouldReturnDate;
     }
 
-    public void setShouldReturnDate(Date shouldReturnDate) {
+    public void setShouldReturnDate(String shouldReturnDate) {
         this.shouldReturnDate = shouldReturnDate;
     }
 
-    public Date getReturnDate() {
+    public String getReturnDate() {
         return returnDate;
     }
 
-    public void setReturnDate(Date returnDate) {
+    public void setReturnDate(String returnDate) {
         this.returnDate = returnDate;
     }
 
-    @Override
-    public String toString() {
-        return "Rent{" +
-                "tableId='" + tableId + '\'' +
-                ", uId=" + uId +
-                ", cId=" + cId +
-                ", carId=" + carId +
-                ", imprest=" + imprest +
-                ", shouldPayPrice=" + shouldPayPrice +
-                ", price=" + price +
-                ", beginDate=" + beginDate +
-                ", shouldReturnDate=" + shouldReturnDate +
-                ", returnDate=" + returnDate +
-                '}';
+    public String getRentFlag() {
+        return rentFlag;
+    }
+
+    public void setRentFlag(String rentFlag) {
+        this.rentFlag = rentFlag;
     }
 
     @Override
@@ -148,7 +169,8 @@ public class Rent implements Serializable{
         if (beginDate != null ? !beginDate.equals(rent.beginDate) : rent.beginDate != null) return false;
         if (shouldReturnDate != null ? !shouldReturnDate.equals(rent.shouldReturnDate) : rent.shouldReturnDate != null)
             return false;
-        return returnDate != null ? returnDate.equals(rent.returnDate) : rent.returnDate == null;
+        if (returnDate != null ? !returnDate.equals(rent.returnDate) : rent.returnDate != null) return false;
+        return rentFlag != null ? rentFlag.equals(rent.rentFlag) : rent.rentFlag == null;
     }
 
     @Override
@@ -163,6 +185,27 @@ public class Rent implements Serializable{
         result = 31 * result + (beginDate != null ? beginDate.hashCode() : 0);
         result = 31 * result + (shouldReturnDate != null ? shouldReturnDate.hashCode() : 0);
         result = 31 * result + (returnDate != null ? returnDate.hashCode() : 0);
+        result = 31 * result + (rentFlag != null ? rentFlag.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Rent{" +
+                "tableId='" + tableId + '\'' +
+                ", uId='" + uId + '\'' +
+                ", cId='" + cId + '\'' +
+                ", carId='" + carId + '\'' +
+                ", imprest='" + imprest + '\'' +
+                ", shouldPayPrice='" + shouldPayPrice + '\'' +
+                ", price='" + price + '\'' +
+                ", beginDate='" + beginDate + '\'' +
+                ", shouldReturnDate='" + shouldReturnDate + '\'' +
+                ", returnDate='" + returnDate + '\'' +
+                ", rentFlag='" + rentFlag + '\'' +
+                ", car=" + car +
+                ", customers=" + customers +
+                ", user=" + user +
+                '}';
     }
 }

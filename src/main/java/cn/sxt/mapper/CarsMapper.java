@@ -12,4 +12,7 @@ public interface CarsMapper {
     List<Cars> selectAllCarsInf();
     //根据id查询指定汽车信息，用于租车时查询详细信息，也可用于其他
     Cars slectCarInf(Integer carId);
+    //当汽车出租或归还，改变出租状态
+    void changeCarRenting(Cars car);
+
 }

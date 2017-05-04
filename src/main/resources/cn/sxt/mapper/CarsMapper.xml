@@ -8,6 +8,7 @@
         SELECT     carid as carId,carnumber as carNumer,cartype as carType,color,price
         ,           rentprice as rentPrice  ,deposit,isrenting,description
           from cars
+          where isrenting = '已入库'
                     
     </select>
 
@@ -17,6 +18,10 @@
         from cars
          where carid=#{carId}
     </select>
+
+    <update id="changeCarRenting">
+         update cars SET isrenting = #{isrenting} where carId = #{carId}
+    </update>
 
 </mapper>
 

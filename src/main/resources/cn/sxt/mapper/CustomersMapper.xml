@@ -92,5 +92,8 @@
         select count(*) from customers where identity = #{identity}
     </select>
 
+    <select id="selectCidByIdentity" resultType="java.lang.Integer">
+         SELECT cid FROM customers where identity = #{identity}
+    </select>
 </mapper>
 
