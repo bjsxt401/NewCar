@@ -9,7 +9,7 @@
                      shouldReturnDate,rentFlag,cId,uId,carId)
            VALUES  (#{tableId},#{shouldPayPrice},
                       str_to_date(#{beginDate},'%Y-%m-%d'),str_to_date(#{shouldReturnDate},'%Y-%m-%d')
-                        ,#{rentFlag},#{cId},#{uid},#{carId})
+                        ,#{rentFlag},#{cId},#{uId},#{carId})
     </insert>
 </mapper>
 

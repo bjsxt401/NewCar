@@ -94,7 +94,7 @@
             </td>
             <td>
                 <input type="text" name="username" id="username" readonly="readonly" value="${loginUser.userName}" >
-                <input type="hidden" name="uId"  value="${loginUser.uId}" >
+                <input type="hidden" name="uId"  value="${loginUser.uid}" >
             </td>
 
         </tr>
