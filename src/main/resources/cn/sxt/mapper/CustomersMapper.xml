@@ -34,6 +34,7 @@
 
               order by cid
               limit #{pageBean.startNum},#{pageBean.pageSize}
+
           </select>
 
 
@@ -95,5 +96,33 @@
     <select id="selectCidByIdentity" resultType="java.lang.Integer">
          SELECT cid FROM customers where identity = #{identity}
     </select>
+
+     <select id="selectCustomerInfByCondition" resultType="cn.sxt.entity.Customers">
+         SELECT cid,identity,custname,gender,address,phone,career,password FROM customers
+         <where>
+             <if test="identity!='' and identity!=null" >
+                 AND  identity = #{identity}
+             </if>
+             <if test="custName!='' and custName!=null">
+                 AND  custName = #{custName}
+             </if>
+             <if test="gender!='' and gender!=null">
+                 AND  gender = #{gender}
+             </if>
+             <if test="address!='' and address!=null">
+                 AND  address = #{address}
+             </if>
+             <if test="phone!='' and phone!=null">
+                 AND  phone = #{phone}
+             </if>
+             <if test="career!='' and career!=null">
+                 AND  career = #{career}
+             </if>
+         </where>
+
+     </select>
+
+
+
 </mapper>
 

@@ -23,5 +23,37 @@
          update cars SET isrenting = #{isrenting} where carId = #{carId}
     </update>
 
+    <select id="selectCarInfByCondition" resultType="cn.sxt.entity.Cars">
+        SELECT carid as carId,carnumber as carNumber,cartype as carType,color,price
+                  , rentprice as rentPrice  ,deposit,isrenting,description
+        FROM  cars
+        <where>
+            <if test="carId!='' and carId!=null" >
+                AND  carid = #{carId}
+            </if>
+            <if test="carNumber!='' and carNumber!=null">
+                AND  carNumber = #{carNumber}
+            </if>
+            <if test="carType!='' and carType!=null">
+                AND  carType = #{carType}
+            </if>
+            <if test="color!='' and color!=null">
+                AND  color = #{color}
+            </if>
+            <if test="isrenting!='' and isrenting!=null">
+                AND  isrenting = #{isrenting}
+            </if>
+            <if test="price!='' and price!=null">
+                AND  price = #{price}
+            </if>
+            <if test="rentPrice!='' and rentPrice!=null">
+                AND  rentprice = #{rentPrice}
+            </if>
+            <if test="deposit!='' and deposit!=null">
+                AND  deposit = #{deposit}
+            </if>
+        </where>
+
+    </select>
 </mapper>
 

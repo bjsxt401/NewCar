@@ -13,7 +13,7 @@
     <script type="text/javascript" src="${pageContext.request.contextPath}/My97DatePicker/WdatePicker.js"></script>
 </head>
 <body>
-<form action="/newcar/lease/createRent.action" method="post">
+<form action="/newcar/lease/selectRentByPage.action" method="post">
 
     <table width="100%" cellpadding="0" cellspacing="0" border="0" style="text-align: center">
         <tr>
@@ -70,13 +70,13 @@
                 客户编号
             </td>
             <td>
-                <input type="text"   >
+                <input type="text" name="identity"   >
             </td>
             <td>
                 服务人员编号
             </td>
             <td>
-                <input type="text" name="username" id="username">
+                <input type="text" name="userName" id="userName">
             </td>
 
         </tr>

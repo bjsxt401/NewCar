@@ -21,7 +21,7 @@
         SELECT uid,username AS userName,identity,fullname AS fullName,gender,
           address,phone,roleid,userpwd AS userPwd,position FROM users
            <where>
-               <if test="uid!=0">
+               <if test="uid!=0 and uid!=null">
                    AND uid=#{uid}
                </if>
                <if test="userName!=null and userName!=''">

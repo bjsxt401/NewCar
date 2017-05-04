@@ -14,5 +14,6 @@ public interface CarsMapper {
     Cars slectCarInf(Integer carId);
     //当汽车出租或归还，改变出租状态
     void changeCarRenting(Cars car);
-
+    //查询条件汽车信息
+    Cars selectCarInfByCondition(Cars car);
 }

@@ -28,4 +28,6 @@ public interface CustomersMapper {
     Integer selectIdentity(String identity);
     //根据证件号查询cid
     Integer selectCidByIdentity(String identity);
+    //查询条件客户信息
+    Customers selectCustomerInfByCondition(Customers customer);
 }

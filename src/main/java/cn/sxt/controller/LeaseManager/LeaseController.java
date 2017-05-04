@@ -1,7 +1,9 @@
 package cn.sxt.controller.LeaseManager;
 
 import cn.sxt.entity.Cars;
+import cn.sxt.entity.Customers;
 import cn.sxt.entity.Rent;
+import cn.sxt.entity.Users;
 import cn.sxt.service.LeaseManager.LeaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -61,6 +63,30 @@ public class LeaseController {
     @RequestMapping("/createRent")
     public String createTheRent(Rent rent){
         this.leaseService.createRent(rent);
+        return "carBusinessSystem/selectCar";
+    }
+
+    
+    @RequestMapping("/selectRentByPage")
+    public String selectRentByPage(Rent rent, Cars car, Customers customer, Users user){
+        System.out.println(rent);
+        if (car.getCarNumber()!=""){
+           //根据车号 查询car相关信息放到rent里
+            Cars carResult = this.leaseService.selectCarInfByCondition(car);
+            rent.setCar(carResult);
+        }
+        if (customer.getIdentity()!=""){
+            //根据身份证号 查询customer相关信息放到rent里
+            Customers customerResult = this.leaseService.selectCustomerInfByCondition(customer);
+            rent.setCustomers(customerResult);
+        }
+        if (user.getUserName()!=""){
+            //根据username 查询user相关信息放到rent里
+            Users userResult = this.leaseService.selectUserInfByCondition(user);
+            rent.setUser(userResult);
+        }
+        List<Rent> rents = this.leaseService.selectRentInfByCondition(rent);
+        System.out.println(rents);
         return "carBusinessSystem/selectCar";
     }
 }
