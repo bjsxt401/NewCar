@@ -67,7 +67,7 @@ public class UserServiceImpl implements UserService{
      * @throws ServiceException
      */
     @Override
-    public List<Users> getUsersByUser(Users user) throws ServiceException {
+    public Users getUsersByUser(Users user) throws ServiceException {
         return this.userMapper.selectUsersByUser(user);
     }
 
@@ -101,6 +101,24 @@ public class UserServiceImpl implements UserService{
         info.put("draw", draw);
 
         return info;
+    }
+
+    /**
+     * 更新用户信息
+     * @param user
+     */
+    @Override
+    public void updateUser(Users user) {
+         this.userMapper.updateUser(user);
+    }
+
+    /**
+     * 删除用户
+     * @param user
+     */
+    @Override
+    public void deleteUser(Users user) {
+        this.userMapper.deleteUser(user);
     }
 
     /**

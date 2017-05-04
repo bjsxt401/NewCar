@@ -26,6 +26,7 @@
     <script type="text/javascript" charset="utf8" src="asset/lib/dataTables-1.10.7/media/js/jquery.dataTables.js"></script>
     <script type="text/javascript">
         var rootPath = '${pageContext.request.contextPath}';
+
     </script>
 </head>
 <body>
@@ -211,17 +212,19 @@
         },
         editItemInit : function(item) {
             //编辑方法
-            alert("编辑"+item.uid+"  "+item.userName);
+            window.location.href="user/toUpdateUser.action?uid="+item.uid;
         },
         deleteItem : function(item) {
             //删除
-            alert("删除"+item.uid+"  "+item.userName);
+            //alert("删除"+item.uid+"  "+item.userName);
+            window.location.href="user/deleteUserItem.action?uid="+item.uid;
         },
         showItemDetail: function(item){
             //点击行
             alert("点击"+item.uid+"  "+item.userName);
         }
     };
+    
 </script>
 </body>
 </html>

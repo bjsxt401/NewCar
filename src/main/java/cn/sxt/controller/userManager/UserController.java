@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.Map;
 
@@ -33,15 +34,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    /**
-     * 向jsp userSystem中跳转
-     * @param path
-     * @return
-     */
-    @RequestMapping("/{path}")
-    public String userDispatcher(@PathVariable("path")String path){
-        return "userSystem/"+path;
-    }
+
 
     /**
      * 用户登录
@@ -79,7 +72,7 @@ public class UserController {
      */
    @RequestMapping(value = "/register",method = {RequestMethod.POST})
     public String register(Users user){
-       System.out.println("registerUser==================="+user);
+       //System.out.println("registerUser==================="+user);
        try {
            this.userService.registerUser(user);
            return "redirect:/user/findUser.action";
@@ -98,7 +91,7 @@ public class UserController {
      */
    @RequestMapping(value = "/queryUser",method = {RequestMethod.POST})
     public String queryUserByUser(Users user,HttpServletRequest request){
-       System.out.println("user-----------======="+user);
+      // System.out.println("user-----------======="+user);
        HttpSession session = request.getSession();
        session.setAttribute("queryUser",user);
         return "forward:/user/userListPage.action";
@@ -121,16 +114,12 @@ public class UserController {
        //数据长度
        String pageSize = request.getParameter("pageSize");
 
-       System.out.println("user++--==="+user+"draw===="+draw+"startIndex====="+startIndex+"pageSize===="+pageSize);
-//       //定义列名
-//       String[] cols = {"uid","loginame", "identity","fullname","position","gender","role",};
-
-
+       //System.out.println("user++--==="+user+"draw===="+draw+"startIndex====="+startIndex+"pageSize===="+pageSize);
        Map<String,Object> usersResult = null;
        try {
            usersResult = this.userService.getUsersListByPage(draw,Integer.parseInt(startIndex),Integer.parseInt(pageSize),user);
            String json = new Gson().toJson(usersResult);
-           System.out.println("usersResult======="+usersResult);
+           //System.out.println("usersResult======="+usersResult);
            return new ObjectMapper().writeValueAsString(usersResult);
            
 
@@ -139,5 +128,72 @@ public class UserController {
        }
        return null;
    }
+
+    /**
+     * 预更新操作
+     * @param uid
+     * @param request
+     * @return
+     */
+   @RequestMapping(value = "/toUpdateUser")
+   public String toUpdateUser (@RequestParam("uid")Integer uid,HttpServletRequest request){
+
+        try {
+            Users currentUser = new Users();
+            currentUser.setUid(uid);
+            Users user = this.userService.getUsersByUser(currentUser);
+            request.setAttribute("updateUser",user);
+           // System.out.println("user===---"+user);
+            return "forward:/user/updateUser.action";
+        }   catch (Exception e){
+            e.printStackTrace();
+        }
+       return null;
+   }
+
+    /**
+     * 更新用户信息
+     * @param user
+     * @return
+     */
+   @RequestMapping(value = "/doUpdateUser",method = {RequestMethod.POST})
+    public String doUpdateUser(Users user,HttpServletRequest request){
+       //System.out.println("updateUser==---"+user);
+       try {
+            this.userService.updateUser(user);
+            return "forward:/user/userListPage.action";
+       }   catch (Exception e){
+           e.printStackTrace();
+       }
+       return null;
+   }
+
+    /**
+     * 删除
+     * @param uid
+     * @return
+     */
+   @RequestMapping(value = "/deleteUserItem")
+   public String deleteUserItem(@RequestParam("uid")Integer uid,HttpServletResponse response){
+       try {
+           Users user = new Users();
+           user.setUid(uid);
+           this.userService.deleteUser(user);
+           return "forward:/user/userListPage.action";
+       }   catch (Exception e){
+           e.printStackTrace();
+       }
+         return null;
+   }
+
+    /**
+     * 向jsp userSystem中跳转
+     * @param path
+     * @return
+     */
+    @RequestMapping("/{path}")
+    public String userDispatcher(@PathVariable("path")String path){
+        return "userSystem/"+path;
+    }
 
 }

@@ -14,9 +14,13 @@ public interface UserMapper {
     void addUser(Users user);
 
 
-    List<Users> selectUsersByUser(Users user);
+    Users selectUsersByUser(Users user);
 
     List<Users> getUserByPage(Map<String, Object> params);
 
     int getUserCounts(Map<String, Object> params);
+
+    void updateUser(Users user);
+
+    void deleteUser(Users user);
 }

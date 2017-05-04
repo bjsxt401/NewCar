@@ -18,7 +18,11 @@ public interface UserService {
 
     void registerUser(Users user) throws ServiceException;
 
-    List<Users> getUsersByUser(Users user) throws ServiceException;
+    Users getUsersByUser(Users user) throws ServiceException;
 
     Map<String,Object> getUsersListByPage(String draw,Integer startIndex,Integer pageSize,Users user) throws ServiceException;
+
+    void updateUser(Users user);
+
+    void deleteUser(Users user);
 }

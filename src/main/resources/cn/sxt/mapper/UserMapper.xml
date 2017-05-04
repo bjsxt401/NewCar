@@ -21,29 +21,32 @@
         SELECT uid,username AS userName,identity,fullname AS fullName,gender,
           address,phone,roleid,userpwd AS userPwd,position FROM users
            <where>
+               <if test="uid!=0">
+                   AND uid=#{uid}
+               </if>
                <if test="userName!=null and userName!=''">
-                   AND username LIKE CONCAT('%','#{userName}','%')
+                   AND username=#{userName}
                </if>
                <if test="identity!=null and identity!=''">
-                   AND identity LIKE CONCAT('%','#{identity}','%')
+                   AND identity =#{identity}
                </if>
                <if test="fullName!=null  and fullName!=''">
-               AND fullname LIKE CONCAT('%','#{fullName}','%')
+               AND fullname =#{fullName}
            </if>
                <if test="gender!=null and gender!=''">
                AND gender =#{gender}
            </if>
                <if test="address!=null and address!=''">
-               AND address LIKE CONCAT('%','#{address}','%')
+               AND address =#{address}
            </if>
                <if test="phone!=null and phone!=''">
-               AND phone LIKE CONCAT('%','#{phone}','%')
+               AND phone =#{phone}
            </if>
-               <if test="roleid!=0">
+               <if test="roleid!=0 and roleid!=null">
                AND roleid =#{roleid}
            </if>
                <if test="position!=null and position!=''">
-               AND position LIKE CONCAT('%','#{position}','%')
+               AND position =#{position}
            </if>
 
            </where>
@@ -75,7 +78,7 @@
                 <if test="user.phone!=null and user.phone!=''">
                     AND phone LIKE CONCAT('%',#{user.phone},'%')
                 </if>
-                <if test="user.roleid!=0">
+                <if test="user.roleid!=0 and user.roleid!=null">
                     AND r.roleid=#{user.roleid}
                 </if>
                 <if test="user.position!=null and user.position!=''">
@@ -110,7 +113,7 @@
                 <if test="user.phone!=null and user.phone!=''">
                     AND phone LIKE CONCAT('%',#{user.phone},'%')
                 </if>
-                <if test="user.roleid!=0">
+                <if test="user.roleid!=0 and user.roleid!=null">
                     AND roleid=#{user.roleid}
                 </if>
                 <if test="user.position!=null and user.position!=''">
@@ -119,4 +122,68 @@
             </where>
         </if>
     </select>
+    <!--更新用户信息-->
+    <update id="updateUser">
+           UPDATE users
+           <set>
+               <if test="userName!=null and userName!=''">
+                    username=#{userName},
+               </if>
+               <if test="identity!=null and identity!=''">
+                    identity =#{identity},
+               </if>
+               <if test="fullName!=null  and fullName!=''">
+                    fullname =#{fullName},
+               </if>
+               <if test="gender!=null and gender!=''">
+                    gender =#{gender},
+               </if>
+               <if test="address!=null and address!=''">
+                    address =#{address},
+               </if>
+               <if test="phone!=null and phone!=''">
+                    phone =#{phone},
+               </if>
+               <if test="roleid!=0 and roleid!=null">
+                    roleid =#{roleid},
+               </if>
+               <if test="position!=null and position!=''">
+                    position =#{position},
+               </if>
+           </set>
+        WHERE uid = #{uid}
+    </update>
+    <!--删除用户-->
+    <delete id="deleteUser">
+        DELETE FROM users
+        <where>
+            <if test="uid!=0">
+                AND uid=#{uid}
+            </if>
+            <if test="userName!=null and userName!=''">
+                AND username=#{userName}
+            </if>
+            <if test="identity!=null and identity!=''">
+                AND identity =#{identity}
+            </if>
+            <if test="fullName!=null  and fullName!=''">
+                AND fullname =#{fullName}
+            </if>
+            <if test="gender!=null and gender!=''">
+                AND gender =#{gender}
+            </if>
+            <if test="address!=null and address!=''">
+                AND address =#{address}
+            </if>
+            <if test="phone!=null and phone!=''">
+                AND phone =#{phone}
+            </if>
+            <if test="roleid!=0 and roleid!=null">
+                AND roleid =#{roleid}
+            </if>
+            <if test="position!=null and position!=''">
+                AND position =#{position}
+            </if>
+        </where>
+    </delete>
 </mapper>
