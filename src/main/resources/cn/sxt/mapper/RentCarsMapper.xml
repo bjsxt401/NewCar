@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.sxt.mapper.CarsMapper">
+<mapper namespace="cn.sxt.mapper.RentCarsMapper">
 
     <select id="selectAllCarsInf" resultType="cn.sxt.entity.Cars">
         SELECT     carid as carId,carnumber as carNumer,cartype as carType,color,price

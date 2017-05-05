@@ -24,7 +24,7 @@
         <result property="shouldReturnDate" column="shouldreturndate"></result>
         <result property="returnDate" column="returndate"></result>
         <association property="car" javaType="cn.sxt.entity.Cars"
-                     column="carId" select="cn.sxt.mapper.CarsMapper.slectCarInf">
+                     column="carId" select="cn.sxt.mapper.RentCarsMapper.slectCarInf">
         </association>
         <association property="customers" javaType="cn.sxt.entity.Customers"
                      column="cid" select="cn.sxt.mapper.CustomersMapper.selectModifyCustomer">

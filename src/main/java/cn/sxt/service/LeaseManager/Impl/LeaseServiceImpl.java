@@ -4,12 +4,11 @@ import cn.sxt.entity.Cars;
 import cn.sxt.entity.Customers;
 import cn.sxt.entity.Rent;
 import cn.sxt.entity.Users;
-import cn.sxt.mapper.CarsMapper;
+import cn.sxt.mapper.RentCarsMapper;
 import cn.sxt.mapper.CustomersMapper;
 import cn.sxt.mapper.RentMapper;
 import cn.sxt.mapper.UserMapper;
 import cn.sxt.service.LeaseManager.LeaseService;
-import org.apache.ibatis.ognl.IntHashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +23,7 @@ import java.util.Map;
 public class LeaseServiceImpl implements LeaseService{
 
     @Autowired
-    private CarsMapper carsMapper;
+    private RentCarsMapper rentCarsMapper;
     @Autowired
     private RentMapper rentMapper;
     @Autowired
@@ -33,13 +32,13 @@ public class LeaseServiceImpl implements LeaseService{
     private UserMapper userMapper;
 
     public List<Cars> selectAllCarsInf() {
-        List<Cars> cars = this.carsMapper.selectAllCarsInf();
+        List<Cars> cars = this.rentCarsMapper.selectAllCarsInf();
         return cars;
     }
 
     public Map<String ,Object> selectCarInfById(Integer carId, String identity) {
         Map<String ,Object> map = new HashMap<String ,Object>();
-        Cars  car = this.carsMapper.slectCarInf(carId);
+        Cars  car = this.rentCarsMapper.slectCarInf(carId);
         map.put("car",car);
         Integer cid = this.customersMapper.selectCidByIdentity(identity);
         map.put("cId",cid);
@@ -51,11 +50,11 @@ public class LeaseServiceImpl implements LeaseService{
        Cars car = new Cars();
        car.setCarId(Integer.parseInt(rent.getCarId()));
        car.setIsrenting("出租中");
-       this.carsMapper.changeCarRenting(car);
+       this.rentCarsMapper.changeCarRenting(car);
     }
     //查询条件汽车信息
     public Cars selectCarInfByCondition(Cars car) {
-        Cars carResult =  this.carsMapper.selectCarInfByCondition(car);
+        Cars carResult =  this.rentCarsMapper.selectCarInfByCondition(car);
         return carResult;
     }
     //查询条件客户信息

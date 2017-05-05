@@ -101,6 +101,7 @@ public class LeaseController {
         session.setAttribute("pageBean",pageBean);
         return "carBusinessSystem/selectRentsByPageResult";
     }
+    @RequestMapping("/selectRentByPage2")
     public String selectRentByPage2(PageBean pageBean,HttpSession session){
         Rent rent = (Rent) session.getAttribute("selectRentInfCondition");
         pageBean.init();
