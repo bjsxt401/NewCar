@@ -116,4 +116,30 @@ public class LeaseController {
         session.setAttribute("pageBean",pageBean);
         return "carBusinessSystem/selectRentsByPageResult";
     }
+
+
+    /**
+     * 查询需要更改的出租单信息
+     * @param rent
+     * @param session
+     * @return
+     */
+
+    @RequestMapping("/modifyRent")
+    public String modifyRent(Rent rent,HttpSession session){
+        Rent rentResult = this.leaseService.selectMotifyRent(rent);
+        session.setAttribute("motifyRent",rentResult);
+        return "carBusinessSystem/modifyRent";
+    }
+
+
+    /**
+     * 更新出租单信息
+     * @return
+     */
+    @RequestMapping("/updateRent")
+    public String updateRent(Rent rent){
+        this.leaseService.updateRent(rent);
+        return "carBusinessSystem/result";
+    }
 }

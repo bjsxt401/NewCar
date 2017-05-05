@@ -23,6 +23,7 @@
         <result property="beginDate" column="begindate"></result>
         <result property="shouldReturnDate" column="shouldreturndate"></result>
         <result property="returnDate" column="returndate"></result>
+        <result property="rentFlag" column="rentFlag"></result>
         <association property="car" javaType="cn.sxt.entity.Cars"
                      column="carId" select="cn.sxt.mapper.RentCarsMapper.slectCarInf">
         </association>
@@ -37,7 +38,7 @@
      <select id="selectRentInfByCondition" resultMap="rentMap">
            select tableid as tableId,uid as uId,cid as cId,carid as carId,imprest,
             shouldpayprice as shouldPayPrice,price,begindate as beginDate,shouldreturndate as
-              shouldReturnDate,returndate as returnDate from renttable
+              shouldReturnDate,returndate as returnDate ,rentflag as rentFlag from renttable
               <where>
                   <if test="rent.tableId!='' and rent.tableId!=null">
                      AND tableId = #{rent.tableId}
@@ -112,9 +113,65 @@
     </select>
 
 
+    <select id="selectRent" resultMap="rentMap">
+        select tableid as tableId,uid as uId,cid as cId,carid as carId,imprest,
+        shouldpayprice as shouldPayPrice,price,begindate as beginDate,shouldreturndate as
+        shouldReturnDate,returndate as returnDate ,rentflag as rentFlag from renttable
+        <where>
+            <if test="tableId!='' and tableId!=null">
+                AND tableId = #{tableId}
+            </if>
+            <if test="uId!='' and uId!=null">
+                AND uId = #{uId}
+            </if>
+            <if test="cId!='' and cId!=null">
+                AND cId = #{cId}
+            </if>
+            <if test="carId!='' and carId!=null">
+                AND carId = #{carId}
+            </if>
+            <if test="imprest!='' and imprest!=null">
+                AND imprest = #{imprest}
+            </if>
+            <if test="shouldPayPrice!='' and shouldPayPrice!=null">
+                AND shouldPayPrice = #{shouldPayPrice}
+            </if>
+            <if test="price!='' and price!=null">
+                AND price = #{price}
+            </if>
+            <if test="beginDate!='' and beginDate!=null">
+                AND beginDate = str_to_date(#{beginDate},'%Y-%m-%d')
+            </if>
+            <if test="shouldReturnDate!='' and shouldReturnDate!=null">
+                AND shouldReturnDate = str_to_date(#{shouldReturnDate},'%Y-%m-%d')
+            </if>
+            <if test="returnDate!='' and returnDate!=null">
+                AND returnDate = str_to_date(#{returnDate},'%Y-%m-%d')
+            </if>
+        </where>
+    </select>
 
-
-
+    <update id="updateRent">
+        update renttable
+        <set>
+            <if test="price!='' and price !=null">
+              price = #{price}  ,
+            </if>
+            <if test="beginDate!='' and beginDate !=null">
+                beginDate = str_to_date(#{beginDate},'%Y-%m-%d')   ,
+            </if>
+            <if test="shouldReturnDate!='' and shouldReturnDate !=null">
+                  shouldReturnDate = str_to_date(#{shouldReturnDate},'%Y-%m-%d')  ,
+            </if>
+            <if test="returnDate!='' and returnDate !=null">
+                 returnDate = str_to_date(#{returnDate},'%Y-%m-%d')    ,
+            </if>
+            <if test="rentFlag!='' and rentFlag !=null">
+                 rentFlag = #{rentFlag}   ,
+            </if>
+        </set>
+        where tableid = #{tableId}
+    </update>
     
 </mapper>
 

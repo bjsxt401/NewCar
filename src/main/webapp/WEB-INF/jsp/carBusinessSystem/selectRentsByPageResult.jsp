@@ -81,8 +81,6 @@
             <td>编辑</td>
         </tr>
         <c:forEach items="${rents}" varStatus="status" var="each">
-            <form action="/newcar/lease/modifyRent.action" method="post">
-                <input type="hidden" name="tableId" value="${each.tableId}">
                 <tr>
                     <td>${status.index+1}</td>
                     <td>${each.tableId}</td>
@@ -93,9 +91,10 @@
                     <td>${each.customers.custName}</td>
                     <td>${each.car.carNumber}</td>
                     <td>${each.user.userName}</td>
-                    <td><input type="submit" value="编辑"></td>
+                    <td>
+                        <a href="/newcar/lease/modifyRent.action?tableId=${each.tableId}">编辑</a>
+                    </td>
                 </tr>
-            </form>
         </c:forEach>
 
     </table>

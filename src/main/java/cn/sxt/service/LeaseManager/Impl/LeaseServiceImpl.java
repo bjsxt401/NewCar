@@ -31,11 +31,22 @@ public class LeaseServiceImpl implements LeaseService{
     @Autowired
     private UserMapper userMapper;
 
+    /**
+     * 查询能够出租的车辆信息
+     * @return
+     */
     public List<Cars> selectAllCarsInf() {
         List<Cars> cars = this.rentCarsMapper.selectAllCarsInf();
         return cars;
     }
 
+    /**
+     * 根据Id查询车辆信息，
+     * 并将客户证件号存到session
+     * @param carId
+     * @param identity
+     * @return
+     */
     public Map<String ,Object> selectCarInfById(Integer carId, String identity) {
         Map<String ,Object> map = new HashMap<String ,Object>();
         Cars  car = this.rentCarsMapper.slectCarInf(carId);
@@ -45,6 +56,10 @@ public class LeaseServiceImpl implements LeaseService{
         return map;
     }
 
+    /**
+     * 创建出租单
+     * @param rent
+     */
     public void createRent(Rent rent) {
        this.rentMapper.createRent(rent);
        Cars car = new Cars();
@@ -73,8 +88,31 @@ public class LeaseServiceImpl implements LeaseService{
         return rents;
     }
 
+    /**
+     * 根据条件查询订单的总条数
+     * @param rent
+     * @return
+     */
     public Integer selectRentInfByConditionTotal(Rent rent) {
        Integer total = this.rentMapper.selectRentInfByConditionTotal(rent);
         return total;
+    }
+
+    /**
+     * 查询需要修改的订单信息
+     * @param rent
+     * @return
+     */
+    public Rent selectMotifyRent(Rent rent) {
+        Rent rentResult = this.rentMapper.selectRent(rent);
+        return rentResult;
+    }
+
+    /**
+     * 更新出租单信息
+     * @param rent
+     */
+    public void updateRent(Rent rent) {
+       this.rentMapper.updateRent(rent);
     }
 }

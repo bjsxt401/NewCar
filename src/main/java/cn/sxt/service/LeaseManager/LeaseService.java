@@ -28,4 +28,8 @@ public interface LeaseService {
         List<Rent> selectRentInfByCondition(Map<String,Object> map);
         //查询有多少数据
         Integer selectRentInfByConditionTotal(Rent rent);
+        //查询需要修改的订单信息；
+        Rent selectMotifyRent(Rent rent);
+        //更新出租单信息
+        void updateRent(Rent rent);
 }
