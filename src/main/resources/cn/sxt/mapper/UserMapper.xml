@@ -196,5 +196,11 @@
             </if>
         </where>
     </delete>
+
+    <select id="selectUserById" resultType="cn.sxt.entity.Users" >
+          SELECT uid,username AS userName,identity,fullname AS fullName,gender,
+        address,phone ,roleid,userpwd AS userPwd,position FROM users
+        where uid = #{uId}
+    </select>
     <!--22222222222-->
 </mapper>

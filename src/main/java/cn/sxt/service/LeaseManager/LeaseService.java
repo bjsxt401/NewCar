@@ -24,6 +24,8 @@ public interface LeaseService {
         Customers selectCustomerInfByCondition(Customers customer);
         //查询条件用户信息
         Users selectUserInfByCondition(Users user);
-        //查询条件订单信息
-        List<Rent> selectRentInfByCondition(Rent rent);
+        //分页查询条件订单信息
+        List<Rent> selectRentInfByCondition(Map<String,Object> map);
+        //查询有多少数据
+        Integer selectRentInfByConditionTotal(Rent rent);
 }

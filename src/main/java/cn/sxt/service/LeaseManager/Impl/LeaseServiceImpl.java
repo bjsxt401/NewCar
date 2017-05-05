@@ -69,8 +69,13 @@ public class LeaseServiceImpl implements LeaseService{
         return userResult;
     }
     //查询条件订单信息
-    public List<Rent> selectRentInfByCondition(Rent rent) {
-        List<Rent> rents = this.rentMapper.selectRentInfByCondition(rent);
+    public List<Rent> selectRentInfByCondition(Map<String,Object> map) {
+        List<Rent> rents = this.rentMapper.selectRentInfByCondition(map);
         return rents;
+    }
+
+    public Integer selectRentInfByConditionTotal(Rent rent) {
+       Integer total = this.rentMapper.selectRentInfByConditionTotal(rent);
+        return total;
     }
 }

@@ -1,9 +1,6 @@
 package cn.sxt.controller.LeaseManager;
 
-import cn.sxt.entity.Cars;
-import cn.sxt.entity.Customers;
-import cn.sxt.entity.Rent;
-import cn.sxt.entity.Users;
+import cn.sxt.entity.*;
 import cn.sxt.service.LeaseManager.LeaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -60,33 +58,61 @@ public class LeaseController {
      * @param rent  接收订单信息存储  并修改车辆出租状态
      * @return
      */
-    @RequestMapping("/createRent")
-    public String createTheRent(Rent rent){
+    @RequestMapping("/setRentInf")
+    public String setRentInf(Rent rent){
         this.leaseService.createRent(rent);
         return "carBusinessSystem/selectCar";
     }
 
-    
+
+
+
     @RequestMapping("/selectRentByPage")
-    public String selectRentByPage(Rent rent, Cars car, Customers customer, Users user){
-        System.out.println(rent);
+    public String selectRentByPage(Rent rent, Cars car, Customers customer, Users user, HttpSession session){
         if (car.getCarNumber()!=""){
-           //根据车号 查询car相关信息放到rent里
+           //根据车号 查询carid放到rent里
             Cars carResult = this.leaseService.selectCarInfByCondition(car);
-            rent.setCar(carResult);
+            rent.setCarId(carResult.getCarId().toString());
         }
         if (customer.getIdentity()!=""){
-            //根据身份证号 查询customer相关信息放到rent里
+            //根据身份证号 查询customerid放到rent里
             Customers customerResult = this.leaseService.selectCustomerInfByCondition(customer);
-            rent.setCustomers(customerResult);
+            Integer id = customerResult.getId();
+            rent.setcId(id.toString());
         }
         if (user.getUserName()!=""){
-            //根据username 查询user相关信息放到rent里
+            //根据username 查询userID放到rent里
             Users userResult = this.leaseService.selectUserInfByCondition(user);
-            rent.setUser(userResult);
+            rent.setuId(userResult.getUid().toString());
         }
-        List<Rent> rents = this.leaseService.selectRentInfByCondition(rent);
-        System.out.println(rents);
-        return "carBusinessSystem/selectCar";
+        session.setAttribute("selectRentInfCondition",rent);
+        PageBean pageBean = new PageBean();
+        pageBean.setCurrentPage(1);
+        pageBean.setPageSize(5);
+        pageBean.init();
+        Map<String,Object> map = new HashMap<String,Object>();
+        map.put("rent",rent);
+        map.put("pageBean",pageBean);
+        List<Rent> rents = this.leaseService.selectRentInfByCondition(map);
+        Integer total = this.leaseService.selectRentInfByConditionTotal(rent);
+        pageBean.setTotal(total);
+        pageBean.init();
+        session.setAttribute("rents",rents);
+        session.setAttribute("pageBean",pageBean);
+        return "carBusinessSystem/selectRentsByPageResult";
+    }
+    public String selectRentByPage2(PageBean pageBean,HttpSession session){
+        Rent rent = (Rent) session.getAttribute("selectRentInfCondition");
+        pageBean.init();
+        Map<String,Object> map = new HashMap<String,Object>();
+        map.put("rent",rent);
+        map.put("pageBean",pageBean);
+        List<Rent> rents = this.leaseService.selectRentInfByCondition(map);
+        Integer total = this.leaseService.selectRentInfByConditionTotal(rent);
+        pageBean.setTotal(total);
+        pageBean.init();
+        session.setAttribute("rents",rents);
+        session.setAttribute("pageBean",pageBean);
+        return "carBusinessSystem/selectRentsByPageResult";
     }
 }

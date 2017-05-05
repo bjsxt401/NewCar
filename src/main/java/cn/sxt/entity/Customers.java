@@ -4,7 +4,7 @@ package cn.sxt.entity;
  * Created by Administrator on 2017/4/28.
  */
 public class Customers {
-    private int cid;               //客户ID
+    private Integer cid;               //客户ID
     private String identity;      //身份证号
     private String custName;      //客户姓名
     private String gender;           //性别

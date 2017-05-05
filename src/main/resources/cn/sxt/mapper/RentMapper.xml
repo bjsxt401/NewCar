@@ -11,5 +11,110 @@
                       str_to_date(#{beginDate},'%Y-%m-%d'),str_to_date(#{shouldReturnDate},'%Y-%m-%d')
                         ,#{rentFlag},#{cId},#{uId},#{carId})
     </insert>
+
+    <resultMap id="rentMap" type="cn.sxt.entity.Rent" >
+          <id property="tableId" column="tableid"></id>
+        <result property="uId" column="uid"></result>
+        <result property="cId" column="cid"></result>
+        <result property="carId" column="carid"></result>
+        <result property="imprest" column="imprest"></result>
+        <result property="shouldPayPrice" column="shouldpayprice"></result>
+        <result property="price" column="price"></result>
+        <result property="beginDate" column="begindate"></result>
+        <result property="shouldReturnDate" column="shouldreturndate"></result>
+        <result property="returnDate" column="returndate"></result>
+        <association property="car" javaType="cn.sxt.entity.Cars"
+                     column="carId" select="cn.sxt.mapper.CarsMapper.slectCarInf">
+        </association>
+        <association property="customers" javaType="cn.sxt.entity.Customers"
+                     column="cid" select="cn.sxt.mapper.CustomersMapper.selectModifyCustomer">
+        </association>
+        <association property="user" javaType="cn.sxt.entity.Customers"
+                     column="uid" select="cn.sxt.mapper.UserMapper.selectUserById">
+        </association>
+    </resultMap>
+
+     <select id="selectRentInfByCondition" resultMap="rentMap">
+           select tableid as tableId,uid as uId,cid as cId,carid as carId,imprest,
+            shouldpayprice as shouldPayPrice,price,begindate as beginDate,shouldreturndate as
+              shouldReturnDate,returndate as returnDate from renttable
+              <where>
+                  <if test="rent.tableId!='' and rent.tableId!=null">
+                     AND tableId = #{rent.tableId}
+                  </if>
+                  <if test="rent.uId!='' and rent.uId!=null">
+                     AND uId = #{rent.uId}
+                  </if>
+                  <if test="rent.cId!='' and rent.cId!=null">
+                     AND cId = #{rent.cId}
+                  </if>
+                  <if test="rent.carId!='' and rent.carId!=null">
+                     AND carId = #{rent.carId}
+                  </if>
+                  <if test="rent.imprest!='' and rent.imprest!=null">
+                     AND imprest = #{rent.imprest}
+                  </if>
+                  <if test="rent.shouldPayPrice!='' and rent.shouldPayPrice!=null">
+                     AND shouldPayPrice = #{rent.shouldPayPrice}
+                  </if>
+                  <if test="rent.price!='' and rent.price!=null">
+                     AND price = #{rent.price}
+                  </if>
+                  <if test="rent.beginDate!='' and rent.beginDate!=null">
+                     AND beginDate = str_to_date(#{rent.beginDate},'%Y-%m-%d')
+                  </if>
+                  <if test="rent.shouldReturnDate!='' and rent.shouldReturnDate!=null">
+                     AND shouldReturnDate = str_to_date(#{rent.shouldReturnDate},'%Y-%m-%d')
+                  </if>
+                  <if test="rent.returnDate!='' and rent.returnDate!=null">
+                     AND returnDate = str_to_date(#{rent.returnDate},'%Y-%m-%d')
+                  </if>
+              </where>
+            order by tableid
+         limit ${pageBean.startNum},${pageBean.pageSize}
+     </select>
+
+    <select id="selectRentInfByConditionTotal" resultType="java.lang.Integer">
+        select count(tableid)
+          from renttable
+        <where>
+            <if test="tableId!='' and tableId!=null">
+                AND tableId = #{tableId}
+            </if>
+            <if test="uId!='' and uId!=null">
+                AND uId = #{uId}
+            </if>
+            <if test="cId!='' and cId!=null">
+                AND cId = #{cId}
+            </if>
+            <if test="carId!='' and carId!=null">
+                AND carId = #{carId}
+            </if>
+            <if test="imprest!='' and imprest!=null">
+                AND imprest = #{imprest}
+            </if>
+            <if test="shouldPayPrice!='' and shouldPayPrice!=null">
+                AND shouldPayPrice = #{shouldPayPrice}
+            </if>
+            <if test="price!='' and price!=null">
+                AND price = #{price}
+            </if>
+            <if test="beginDate!='' and beginDate!=null">
+                AND beginDate = str_to_date(#{beginDate},'%Y-%m-%d')
+            </if>
+            <if test="shouldReturnDate!='' and shouldReturnDate!=null">
+                AND shouldReturnDate = str_to_date(#{shouldReturnDate},'%Y-%m-%d')
+            </if>
+            <if test="returnDate!='' and returnDate!=null">
+                AND returnDate = str_to_date(#{returnDate},'%Y-%m-%d')
+            </if>
+        </where>
+    </select>
+
+
+
+
+
+    
 </mapper>
 
