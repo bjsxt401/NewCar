@@ -71,8 +71,8 @@
 
     <dd><div class="title"><span><img src="images/leftico03.png" /></span>汽车管理</div>
         <ul class="menuson">
-            <li><cite></cite><a href="dispatchCar/addCar.action" target="rightFrame">添加汽车信息</a><i></i></li>
-            <li><cite></cite><a href="dispatchCar/findCar.action" target="rightFrame">查询汽车信息</a><i></i></li>
+            <li><cite></cite><a href="visitCar/addCar.action" target="rightFrame">添加汽车信息</a><i></i></li>
+            <li><cite></cite><a href="visitCar/findCar.action" target="rightFrame">查询汽车信息</a><i></i></li>
         </ul>
     </dd>
 

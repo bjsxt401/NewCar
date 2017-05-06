@@ -14,6 +14,7 @@ public class Cars implements Serializable {
     private String rentPrice; //租金
     private String deposit; //押金
     private String isrenting; //租用情况
+    private String isrentingName;//
     private String description; //描述
     private long carImageid;//图片id
     private String suffix; //图片格式后缀
@@ -80,6 +81,12 @@ public class Cars implements Serializable {
 
     public void setIsrenting(String isrenting) {
         this.isrenting = isrenting;
+        if (isrenting.equals("0")){
+            this.setIsrentingName("未出租");
+        }else if (isrenting.equals("1")){
+            this.setIsrentingName("已出租");
+        }
+
     }
 
     public String getDescription() {
@@ -106,6 +113,14 @@ public class Cars implements Serializable {
         this.suffix = suffix;
     }
 
+    public String getIsrentingName() {
+        return isrentingName;
+    }
+
+    public void setIsrentingName(String isrentingName) {
+        this.isrentingName = isrentingName;
+    }
+
     public Cars() {
     }
 
@@ -120,6 +135,7 @@ public class Cars implements Serializable {
                 ", rentPrice='" + rentPrice + '\'' +
                 ", deposit='" + deposit + '\'' +
                 ", isrenting='" + isrenting + '\'' +
+                ", isrentingName='" + isrentingName + '\'' +
                 ", description='" + description + '\'' +
                 ", carImageid=" + carImageid +
                 ", suffix='" + suffix + '\'' +
@@ -142,6 +158,8 @@ public class Cars implements Serializable {
         if (getRentPrice() != null ? !getRentPrice().equals(cars.getRentPrice()) : cars.getRentPrice() != null) return false;
         if (getDeposit() != null ? !getDeposit().equals(cars.getDeposit()) : cars.getDeposit() != null) return false;
         if (getIsrenting() != null ? !getIsrenting().equals(cars.getIsrenting()) : cars.getIsrenting() != null) return false;
+        if (getIsrentingName() != null ? !getIsrentingName().equals(cars.getIsrentingName()) : cars.getIsrentingName() != null)
+            return false;
         if (getDescription() != null ? !getDescription().equals(cars.getDescription()) : cars.getDescription() != null)
             return false;
         return getSuffix() != null ? getSuffix().equals(cars.getSuffix()) : cars.getSuffix() == null;
@@ -157,6 +175,7 @@ public class Cars implements Serializable {
         result = 31 * result + (getRentPrice() != null ? getRentPrice().hashCode() : 0);
         result = 31 * result + (getDeposit() != null ? getDeposit().hashCode() : 0);
         result = 31 * result + (getIsrenting() != null ? getIsrenting().hashCode() : 0);
+        result = 31 * result + (getIsrentingName() != null ? getIsrentingName().hashCode() : 0);
         result = 31 * result + (getDescription() != null ? getDescription().hashCode() : 0);
         result = 31 * result + (int) (getCarImageid() ^ (getCarImageid() >>> 32));
         result = 31 * result + (getSuffix() != null ? getSuffix().hashCode() : 0);

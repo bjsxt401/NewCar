@@ -8,4 +8,156 @@
           (carnumber,cartype,color,price,rentprice,deposit,isrenting,description,carimageid,suffix)
           VALUES (#{carNumber},#{carType},#{color},#{price},#{rentPrice},#{deposit},#{isrenting},#{description},#{carImageid},#{suffix})
       </insert>
+
+    <!--分页查询结果-->
+    <select id="getCarsByPage" resultType="Cars">
+        SELECT carid,carnumber AS carNumber,cartype AS carType,color ,price,
+        rentprice AS rentPrice,deposit,isrenting,description,carimageid AS carImageid ,suffix
+        FROM cars
+        <if test="car!=null">
+            <where>
+                <if test="car.carNumber!=null  and car.carNumber!=''">
+                    AND carnumber LIKE CONCAT('%',#{car.carNumber},'%')
+                </if>
+                <if test="car.carType!=null  and car.carType!=''">
+                    AND carType LIKE CONCAT('%',#{car.carType},'%')
+                </if>
+                <if test="car.color!=null and car.color!=''">
+                    AND color LIKE CONCAT('%',#{car.color},'%')
+                </if>
+                <if test="car.price!=null and car.price!=0">
+                    AND price=#{car.price}
+                </if>
+                <if test="car.rentPrice!=null and car.rentPrice!=0">
+                    AND rentPrice = #{car.rentPrice}
+                </if>
+                <if test="car.deposit!=null and car.deposit!=0">
+                    AND deposit=#{car.deposit}
+                </if>
+                <if test="car.isrenting!='' and car.isrenting!=null">
+                    AND isrenting=#{car.isrenting}
+                </if>
+            
+            </where>
+        </if>
+
+        ORDER BY carid ASC
+        limit #{start},#{pageSize}
+    </select>
+    <!--符合条件的用户个数-->
+    <select id="getCarsCounts" resultType="java.lang.Integer">
+        SELECT count(carid) FROM cars
+        <if test="car!=null">
+            <where>
+                <if test="car.carNumber!=null  and car.carNumber!=''">
+                    AND carnumber LIKE CONCAT('%',#{car.carNumber},'%')
+                </if>
+                <if test="car.carType!=null  and car.carType!=''">
+                    AND carType LIKE CONCAT('%',#{car.carType},'%')
+                </if>
+                <if test="car.color!=null and car.color!=''">
+                    AND color LIKE CONCAT('%',#{car.color},'%')
+                </if>
+                <if test="car.price!=null and car.price!=0">
+                    AND price=#{car.price}
+                </if>
+                <if test="car.rentPrice!=null and car.rentPrice!=0">
+                    AND rentPrice = #{car.rentPrice}
+                </if>
+                <if test="car.deposit!=null and car.deposit!=0">
+                    AND deposit=#{car.deposit}
+                </if>
+                <if test="car.isrenting!='' and car.isrenting!=null">
+                    AND isrenting=#{car.isrenting}
+                </if>
+
+            </where>
+        </if>
+    </select>
+
+    <!--通过条件搜索car-->
+    <select id="getCarByCar" resultType="Cars">
+        SELECT carid,carnumber AS carNumber,cartype AS carType,color ,price,
+        rentprice AS rentPrice,deposit,isrenting,description,carimageid AS carImageid ,suffix
+        FROM cars
+        <where>
+            <if test="carId!=null  and carId!=0">
+                AND carId=#{carId}
+            </if>
+            <if test="carNumber!=null  and carNumber!=''">
+                AND carnumber=#{carNumber}
+            </if>
+            <if test="carType!=null  and carType!=''">
+                AND carType =#{carType}
+            </if>
+            <if test="color!=null and color!=''">
+                AND color=#{color}
+            </if>
+            <if test="price!=null and price!=0">
+                AND price=#{price}
+            </if>
+            <if test="rentPrice!=null and rentPrice!=0">
+                AND rentPrice = #{rentPrice}
+            </if>
+            <if test="deposit!=null and deposit!=0">
+                AND deposit=#{deposit}
+            </if>
+            <if test="isrenting!='' and isrenting!=null">
+                AND isrenting=#{isrenting}
+            </if>
+
+        </where>
+    </select>
+
+    <!--更新车的信息-->
+    <update id="updateCar">
+        UPDATE cars
+        <set>
+            <if test="carNumber!=null and carNumber!=''">
+                carNumber=#{carNumber},
+            </if>
+            <if test="carType!=null and carType!=''">
+                carType=#{carType},
+            </if>
+            <if test="color!=null and color!=''">
+                color=#{color},
+            </if>
+            <if test="price!=null and price!=0">
+                price=#{price},
+            </if>
+            <if test="rentPrice!=null and rentPrice!=0">
+                rentPrice=#{rentPrice},
+            </if>
+            <if test="deposit!=null and deposit!=0">
+                deposit=#{deposit},
+            </if>
+            <if test="isrenting!=null and isrenting!=''">
+                isrenting=#{isrenting},
+            </if>
+            <if test="carImageid!=null and carImageid!=''">
+                carImageid=#{carImageid},
+            </if>
+            <if test="description!=null and description!=''">
+                description=#{description},
+            </if>
+            <if test="suffix!=null and suffix!=''">
+                suffix=#{suffix},
+            </if>
+        </set>
+        <where>
+            <if test="carId!=null and carId!=0">
+                AND carId=#{carId}
+            </if>
+            <if test="carNumber!=null and carNumber!=''">
+                AND carNumber=#{carNumber}
+            </if>
+        </where>
+
+    </update>
+
+    <!--删除-->
+    <delete id="deleteCar">
+        DELETE FROM cars
+        WHERE carid=#{carId}
+    </delete>
 </mapper>

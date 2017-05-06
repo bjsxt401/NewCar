@@ -42,7 +42,7 @@
 </head>
 
 <body>
-<form action="FindCarAction.do" method="post">
+<form action="car/queryCar.action" method="post">
     <input  type="hidden" name="method" value="findCar"/>
     <table width="100%" border="0" cellpadding="0" cellspacing="0">
         <tr>
@@ -87,7 +87,7 @@
     <tr>
       <td><div align="center" class="left_txt">租用情况 </div></td>
       <td>
-     <select name="isRenting" id="isRenting" style="width: 80px;">
+     <select name="isrenting" id="isRenting" style="width: 80px;">
 			<option value="0" selected >未出租</option>
 			<option value="1" >已出租</option>
 	</select>
