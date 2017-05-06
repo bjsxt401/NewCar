@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * Created by beichunming on 2017/5/5.
  */
 @Controller
-@RequestMapping("/dispatchCar")
+@RequestMapping("/returnCarSystem")
 public class DispatchCarController {
     @RequestMapping("/{path}")
     public String dispatcher(@PathVariable("path")String path){
-        return "carInfoAndReturnCar/"+path;
+        return "returnCarSystem/"+path;
     }
 }

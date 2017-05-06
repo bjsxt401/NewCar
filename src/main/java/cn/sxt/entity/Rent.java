@@ -11,9 +11,9 @@ public class Rent implements Serializable{
      private String uId;   //    服务人员编号
      private String cId;    //     客户号
      private String carId;    //    车号
-     private String imprest;    //     预付金
-     private String shouldPayPrice;//    应付金
-     private String price;  //实际付款
+     private Double imprest;    //     预付金
+     private Double shouldPayPrice;//    应付金
+     private Double price;  //实际付款
      private String  beginDate ;  //起租日期
      private String  shouldReturnDate ;//应归还日期
      private String  returnDate ; //实际归还日期
@@ -49,19 +49,6 @@ public class Rent implements Serializable{
     public Rent() {
     }
 
-    public Rent(String tableId, String uId, String cId, String carId, String imprest, String shouldPayPrice, String price, String beginDate, String shouldReturnDate, String returnDate, String rentFlag) {
-        this.tableId = tableId;
-        this.uId = uId;
-        this.cId = cId;
-        this.carId = carId;
-        this.imprest = imprest;
-        this.shouldPayPrice = shouldPayPrice;
-        this.price = price;
-        this.beginDate = beginDate;
-        this.shouldReturnDate = shouldReturnDate;
-        this.returnDate = returnDate;
-        this.rentFlag = rentFlag;
-    }
 
     public String getTableId() {
         return tableId;
@@ -95,27 +82,27 @@ public class Rent implements Serializable{
         this.carId = carId;
     }
 
-    public String getImprest() {
+    public Double getImprest() {
         return imprest;
     }
 
-    public void setImprest(String imprest) {
+    public void setImprest(Double imprest) {
         this.imprest = imprest;
     }
 
-    public String getShouldPayPrice() {
+    public Double getShouldPayPrice() {
         return shouldPayPrice;
     }
 
-    public void setShouldPayPrice(String shouldPayPrice) {
+    public void setShouldPayPrice(Double shouldPayPrice) {
         this.shouldPayPrice = shouldPayPrice;
     }
 
-    public String getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 

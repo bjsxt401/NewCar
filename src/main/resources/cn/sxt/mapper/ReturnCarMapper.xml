@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.sxt.mapper.ReturnCarMapper">
+
+        <update id="updateCar">
+              update cars set  isrenting = '未出租' where carid = #{carId}
+        </update>
+
+         <insert id="createCheckTable">
+              insert into checktable values(#{checkId}, str_to_date(#{checkDate},'%Y-%m-%d'),#{field},
+                   #{problem},#{paying} ,#{checkUserId},#{rentId})
+
+         </insert>
+
+
+</mapper>
