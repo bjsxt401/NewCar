@@ -217,7 +217,12 @@
         deleteItem : function(item) {
             //删除
             //alert("删除"+item.uid+"  "+item.userName);
-            window.location.href="user/deleteUserItem.action?uid="+item.uid;
+            var result = confirm("是否确认删除该用户")
+            //确认后删除该用户，并查询第一页数据，
+            if(result){
+                window.location.href="user/deleteUserItem.action?uid="+item.uid;
+            }
+
         },
         showItemDetail: function(item){
             //点击行

@@ -15,6 +15,8 @@ public class Cars implements Serializable {
     private String deposit; //押金
     private String isrenting; //租用情况
     private String description; //描述
+    private long carImageid;//图片id
+    private String suffix; //图片格式后缀
 
     public Integer getCarId() {
         return carId;
@@ -88,6 +90,25 @@ public class Cars implements Serializable {
         this.description = description;
     }
 
+    public long getCarImageid() {
+        return carImageid;
+    }
+
+    public void setCarImageid(long carImageid) {
+        this.carImageid = carImageid;
+    }
+
+    public String getSuffix() {
+        return suffix;
+    }
+
+    public void setSuffix(String suffix) {
+        this.suffix = suffix;
+    }
+
+    public Cars() {
+    }
+
     @Override
     public String toString() {
         return "Cars{" +
@@ -100,54 +121,46 @@ public class Cars implements Serializable {
                 ", deposit='" + deposit + '\'' +
                 ", isrenting='" + isrenting + '\'' +
                 ", description='" + description + '\'' +
+                ", carImageid=" + carImageid +
+                ", suffix='" + suffix + '\'' +
                 '}';
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Cars)) return false;
 
         Cars cars = (Cars) o;
 
-        if (carId != null ? !carId.equals(cars.carId) : cars.carId != null) return false;
-        if (carNumber != null ? !carNumber.equals(cars.carNumber) : cars.carNumber != null) return false;
-        if (carType != null ? !carType.equals(cars.carType) : cars.carType != null) return false;
-        if (color != null ? !color.equals(cars.color) : cars.color != null) return false;
-        if (price != null ? !price.equals(cars.price) : cars.price != null) return false;
-        if (rentPrice != null ? !rentPrice.equals(cars.rentPrice) : cars.rentPrice != null) return false;
-        if (deposit != null ? !deposit.equals(cars.deposit) : cars.deposit != null) return false;
-        if (isrenting != null ? !isrenting.equals(cars.isrenting) : cars.isrenting != null) return false;
-        return description != null ? description.equals(cars.description) : cars.description == null;
+        if (getCarImageid() != cars.getCarImageid()) return false;
+        if (getCarId() != null ? !getCarId().equals(cars.getCarId()) : cars.getCarId() != null) return false;
+        if (getCarNumber() != null ? !getCarNumber().equals(cars.getCarNumber()) : cars.getCarNumber() != null) return false;
+        if (getCarType() != null ? !getCarType().equals(cars.getCarType()) : cars.getCarType() != null) return false;
+        if (getColor() != null ? !getColor().equals(cars.getColor()) : cars.getColor() != null) return false;
+        if (getPrice() != null ? !getPrice().equals(cars.getPrice()) : cars.getPrice() != null) return false;
+        if (getRentPrice() != null ? !getRentPrice().equals(cars.getRentPrice()) : cars.getRentPrice() != null) return false;
+        if (getDeposit() != null ? !getDeposit().equals(cars.getDeposit()) : cars.getDeposit() != null) return false;
+        if (getIsrenting() != null ? !getIsrenting().equals(cars.getIsrenting()) : cars.getIsrenting() != null) return false;
+        if (getDescription() != null ? !getDescription().equals(cars.getDescription()) : cars.getDescription() != null)
+            return false;
+        return getSuffix() != null ? getSuffix().equals(cars.getSuffix()) : cars.getSuffix() == null;
     }
 
     @Override
     public int hashCode() {
-        int result = carId != null ? carId.hashCode() : 0;
-        result = 31 * result + (carNumber != null ? carNumber.hashCode() : 0);
-        result = 31 * result + (carType != null ? carType.hashCode() : 0);
-        result = 31 * result + (color != null ? color.hashCode() : 0);
-        result = 31 * result + (price != null ? price.hashCode() : 0);
-        result = 31 * result + (rentPrice != null ? rentPrice.hashCode() : 0);
-        result = 31 * result + (deposit != null ? deposit.hashCode() : 0);
-        result = 31 * result + (isrenting != null ? isrenting.hashCode() : 0);
-        result = 31 * result + (description != null ? description.hashCode() : 0);
+        int result = getCarId() != null ? getCarId().hashCode() : 0;
+        result = 31 * result + (getCarNumber() != null ? getCarNumber().hashCode() : 0);
+        result = 31 * result + (getCarType() != null ? getCarType().hashCode() : 0);
+        result = 31 * result + (getColor() != null ? getColor().hashCode() : 0);
+        result = 31 * result + (getPrice() != null ? getPrice().hashCode() : 0);
+        result = 31 * result + (getRentPrice() != null ? getRentPrice().hashCode() : 0);
+        result = 31 * result + (getDeposit() != null ? getDeposit().hashCode() : 0);
+        result = 31 * result + (getIsrenting() != null ? getIsrenting().hashCode() : 0);
+        result = 31 * result + (getDescription() != null ? getDescription().hashCode() : 0);
+        result = 31 * result + (int) (getCarImageid() ^ (getCarImageid() >>> 32));
+        result = 31 * result + (getSuffix() != null ? getSuffix().hashCode() : 0);
         return result;
-    }
-
-    public Cars(Integer carId, String carNumber, String carType, String color, String price, String rentPrice, String deposit, String isrenting, String description) {
-        this.carId = carId;
-        this.carNumber = carNumber;
-        this.carType = carType;
-        this.color = color;
-        this.price = price;
-        this.rentPrice = rentPrice;
-        this.deposit = deposit;
-        this.isrenting = isrenting;
-        this.description = description;
-    }
-
-    public Cars() {
     }
 }
 
