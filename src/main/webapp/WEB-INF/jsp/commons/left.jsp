@@ -80,9 +80,9 @@
     <dd><div class="title"><span><img src="images/leftico04.png" /></span>业务管理</div>
         <ul class="menuson">
             <li><cite></cite><a href="carBusinessSystem/carLease.action" target="rightFrame">汽车出租</a><i></i></li>
-            <li><cite></cite><a href="#">信息列表</a><i></i></li>
+            <li><cite></cite><a href="returnCarSystem/returnCar.action" target="rightFrame">汽车入库</a><i></i></li>
             <li><cite></cite><a href="carBusinessSystem/selectRentsByPage.action" target="rightFrame">出租单管理</a><i></i></li>
-            <li><cite></cite><a href="#">其他</a><i></i></li>
+            <li><cite></cite><a href="returnCarSystem/selectCheckRentByPage.action" target="rightFrame">检查单管理</a><i></i></li>
         </ul>
 
     </dd>
