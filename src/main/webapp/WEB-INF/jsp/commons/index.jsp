@@ -36,7 +36,7 @@
 
     <div class="welinfo">
         <span><img src="images/sun.png" alt="天气" /></span>
-        <b>Admin早上好，欢迎使用信息管理系统</b>(admin@uimaker.com)
+        <b>${sessionScope.loginUser.userName}早上好，欢迎使用信息管理系统</b>(${sessionScope.loginUser.userName}@uimaker.com)
         <a href="#">帐号设置</a>
     </div>
 

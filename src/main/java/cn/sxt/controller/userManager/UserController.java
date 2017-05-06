@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.PrintWriter;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
 
@@ -230,6 +231,18 @@ public class UserController {
        return null;
    }
 
+   @RequestMapping(value = "/logout")
+   public String logout(HttpServletRequest request){
+       //获取session中的所有属性
+       Enumeration em = request.getSession().getAttributeNames();
+       HttpSession session = request.getSession();
+       //循环遍历移除
+       while (em.hasMoreElements()){
+           session.removeAttribute(em.nextElement().toString());
+       }
+       session.invalidate();
+       return "redirect:/login.jsp";
+   }
 
     /**
      * 向jsp userSystem中跳转

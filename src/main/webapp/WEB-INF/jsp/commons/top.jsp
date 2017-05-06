@@ -50,11 +50,11 @@
     <ul>
         <li><span><img src="images/help.png" title="帮助"  class="helpimg"/></span><a href="#">帮助</a></li>
         <li><a href="#">关于</a></li>
-        <li><a href="login.html" target="_parent">退出</a></li>
+        <li><a href="user/logout.action" target="_parent">退出</a></li>
     </ul>
 
     <div class="user">
-        <span>admin</span>
+        <span>${sessionScope.loginUser.userName}</span>
         <i>消息</i>
         <b>5</b>
     </div>
