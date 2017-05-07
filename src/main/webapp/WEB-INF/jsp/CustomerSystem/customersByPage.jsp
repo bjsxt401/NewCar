@@ -119,6 +119,11 @@
         }
         function toPageNo(){ // 跳转到第几页
             var pageNo = $("#toPageNo").val();
+            if(pageNo==""){
+                pageNo = 1;
+            }else{
+                pageNo = parseInt(pageNo);
+            }
             if(pageNo < 1 || pageNo > totalPage){
                 // 输入的页码超出范围
                 AjaxSelect(1);

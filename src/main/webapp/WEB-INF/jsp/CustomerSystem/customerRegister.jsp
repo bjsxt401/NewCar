@@ -53,13 +53,13 @@
             var result3 = checkCustName();
             var result4 = checkPhone();
             if(((result1&&result2)&&result3)&&result4){
-                $("#compileCustomer").submit();
+                $("#registerCustomer").submit();
             }
         }
     </script>
 </head>
 <body>
-<form action="/newcar/customer/register.action" method="post">
+<form action="/newcar/customer/register.action" method="post" id="registerCustomer">
 
     <table width="100%" cellpadding="0" cellspacing="0" border="0" style="text-align: center">
         <tr>
