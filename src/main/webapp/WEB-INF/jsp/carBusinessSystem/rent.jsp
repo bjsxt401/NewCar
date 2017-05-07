@@ -28,7 +28,7 @@
 
 </head>
 <body>
-<form action="/newcar/lease/createRent.action" method="post">
+<form action="lease/createRent.action" method="post">
 
     <table width="100%" cellpadding="0" cellspacing="0" border="0" style="text-align: center">
         <tr>

@@ -7,6 +7,8 @@ import cn.sxt.exception.service.ServiceException;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by beichunming on 2017/5/4.
@@ -22,5 +24,15 @@ public interface ReturnCarService {
     void uodateRent(Rent rent);
     //创建检查单
     void createCheckTable(CheckTable checkTable);
+    //分页查询检查但信息
+    List<CheckTable> selectCheckTableByPage(Map<String,Object> map);
+    //分页总条数
+    Integer selectCheckTableByPageTotal(CheckTable checkTable);
+    //查询修改的检查单信息
+    CheckTable modifyCheckTable(CheckTable checkTable);
+    //删除检查单
+    void deleteCheckTable(CheckTable checkTable);
+    //更新检查单
+    void updateCheckTable(CheckTable checkTable);
 
 }

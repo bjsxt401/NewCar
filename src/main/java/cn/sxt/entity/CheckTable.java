@@ -14,6 +14,15 @@ public class CheckTable implements Serializable {
      private Integer checkUserId;//检查者Id
      private String rentId;//出租单编号
      private Rent rent;
+     private Users user ;
+
+    public Users getUser() {
+        return user;
+    }
+
+    public void setUser(Users user) {
+        this.user = user;
+    }
 
     public CheckTable() {
     }
@@ -96,7 +105,8 @@ public class CheckTable implements Serializable {
         if (paying != null ? !paying.equals(that.paying) : that.paying != null) return false;
         if (checkUserId != null ? !checkUserId.equals(that.checkUserId) : that.checkUserId != null) return false;
         if (rentId != null ? !rentId.equals(that.rentId) : that.rentId != null) return false;
-        return rent != null ? rent.equals(that.rent) : that.rent == null;
+        if (rent != null ? !rent.equals(that.rent) : that.rent != null) return false;
+        return user != null ? user.equals(that.user) : that.user == null;
     }
 
     @Override
@@ -109,6 +119,7 @@ public class CheckTable implements Serializable {
         result = 31 * result + (checkUserId != null ? checkUserId.hashCode() : 0);
         result = 31 * result + (rentId != null ? rentId.hashCode() : 0);
         result = 31 * result + (rent != null ? rent.hashCode() : 0);
+        result = 31 * result + (user != null ? user.hashCode() : 0);
         return result;
     }
 
@@ -120,9 +131,10 @@ public class CheckTable implements Serializable {
                 ", field='" + field + '\'' +
                 ", problem='" + problem + '\'' +
                 ", paying=" + paying +
-                ", checkUserId='" + checkUserId + '\'' +
+                ", checkUserId=" + checkUserId +
                 ", rentId='" + rentId + '\'' +
                 ", rent=" + rent +
+                ", user=" + user +
                 '}';
     }
 }

@@ -13,7 +13,7 @@
     <script type="text/javascript" src="${pageContext.request.contextPath}/My97DatePicker/WdatePicker.js"></script>
 </head>
 <body>
-<form action="/newcar/lease/selectRentByPage.action" method="post">
+<form action="lease/selectRentByPage.action" method="post">
 
     <table width="100%" cellpadding="0" cellspacing="0" border="0" style="text-align: center">
         <tr>

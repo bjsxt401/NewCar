@@ -38,7 +38,7 @@
 
 </head>
 <body>
-<form action="/newcar/returnCar/createCheckTable.action" method="post" id="createCheckTable">
+<form action="returnCar/createCheckTable.action" method="post" id="createCheckTable">
 
     <table width="100%" cellpadding="0" cellspacing="0" border="0" style="text-align: center">
         <tr>

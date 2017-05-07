@@ -22,7 +22,7 @@
              var span = $("#tableIdSpan")
               $.ajax({
                   "method":"post",
-                  "url":"/newcar/returnCar/selectTableId.action",
+                  "url":"returnCar/selectTableId.action",
                   "data":{
                       "tableId":tableId
                   },
@@ -30,7 +30,7 @@
                       if(data.hasTableId){
                           //验证通过后 发请求查询车辆信息跳转至租车页面，并把该用户identity存到作用域
                           span[0].innerHTML='<a href=' +
-                              '"/newcar/returnCar/createCheckTablePage.action?tableId='+tableId+'">继续</a>';
+                              '"returnCar/createCheckTablePage.action?tableId='+tableId+'">继续</a>';
                       }else{
                           span.attr("class","red");
                           span[0].innerHTML="出租单号错误";

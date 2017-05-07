@@ -19,11 +19,11 @@
 <body>
       <table class="table table-hover" >
           <c:forEach items="${carsInf}" varStatus="status" var="each">
-              <form action="/newcar/lease/selectedCar.action" method="post">
+              <form action="lease/selectedCar.action" method="post">
                   <input type="hidden" name="carId" value="${each.carId}">
              <tr>
                  <td><div id="carImg${each.carId}"></div></td>
-                 <td>${status.index}</td>
+                 <td>${status.index+1}</td>
                  <td>汽车型号${each.carType}</td>
                  <td>汽车颜色${each.color}</td>
                  <td>汽车租金${each.rentPrice}</td>

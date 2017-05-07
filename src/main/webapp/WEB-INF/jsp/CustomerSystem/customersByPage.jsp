@@ -37,7 +37,7 @@
              currentPage = pageNum
             $.ajax({
                 "method":"post",
-                "url":"/newcar/customer/selectCustomer.action",
+                "url":"customer/selectCustomer.action",
                 "data":{
                     "currentPage":pageNum,
                     "pageSize":5
@@ -135,7 +135,7 @@
         function ajaxDelete (cid){
             $.ajax({
                 "method":"post",
-                "url":"/newcar/customer/deleteCustomer.action",
+                "url":"customer/deleteCustomer.action",
                 "data":{
                     "cid":cid
                 }
@@ -172,7 +172,7 @@
 
     </tbody>
 </table>
-<form action="/newcar/customer/selectModifyCustomer.action" id="selectModifyCustomer">
+<form action="customer/selectModifyCustomer.action" id="selectModifyCustomer">
     <input type="hidden" id="cid" name="cid" value="">
 </form>
 </body>

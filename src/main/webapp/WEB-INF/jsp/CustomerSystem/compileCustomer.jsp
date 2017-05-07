@@ -40,7 +40,7 @@
     </script>
 </head>
 <body>
-<form action="/newcar/customer/modifyCustomer.action" id="compileCustomer">
+<form action="customer/modifyCustomer.action" id="compileCustomer">
 <table width="100%" cellpadding="0" cellspacing="0" border="0" style="text-align: center">
     <input type="hidden" name="id" value="${modifyCustomer.id}">
     <tr>
@@ -106,7 +106,7 @@
 
 </table>
 </form>
-<form action="/newcar/customer/modifyPwd.action" id="modifyPwd">
+<form action="customer/modifyPwd.action" id="modifyPwd">
     <input type="hidden" id="cid" name="id" value="">
 </form>
 </body>

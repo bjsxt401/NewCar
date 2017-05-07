@@ -66,38 +66,63 @@
                 SubMit(pageNo);
             }
         }
+        function relDelete(checkId) {
+            var result = confirm("是否确认删除该检查单");
+            if(result){
+                    $.ajax({
+                        "method":"post",
+                        "url":"returnCar/deleteCheckTable.action",
+                        "data":{
+                            "checkId":checkId
+                        },
+                        "success":function (data) {
+                            if(data.result){
+                                alert("修改成功");
+
+                            }
+                        }
+                    });
+                SubMit(1);
+                }
+        }
     </script>
 
 </head>
 <body>
-<form action="lease/selectRentByPage2.action" id="myForm" method="post">
+<form action="returnCar/selectCheckTableByPage2.action" id="myForm" method="post">
 
     <table width="100%" class="table table-hover" cellpadding="0" cellspacing="0" border="0" style="text-align: center">
         <tr>
             <td>序号</td>
+            <td>检查单号</td>
+            <td>检查日期</td>
+            <td>属性</td>
+            <td>问题</td>
+            <td>赔款</td>
+            <td>检查者姓名</td>
             <td>出租单编号</td>
-            <td>应付金</td>
-            <td>起租日期</td>
-            <td>应归还日期</td>
-            <td>归还日期</td>
-            <td>客户姓名</td>
-            <td>车号</td>
-            <td>服务人员编号</td>
             <td>编辑</td>
+            <td>删除</td>
         </tr>
-        <c:forEach items="${rents}" varStatus="status" var="each">
+        <c:forEach items="${CheckTables}" varStatus="status" var="each">
                 <tr>
                     <td>${status.index+1}</td>
-                    <td>${each.tableId}</td>
-                    <td>${each.shouldPayPrice}</td>
-                    <td>${each.beginDate}</td>
-                    <td>${each.shouldReturnDate}</td>
-                    <td>${each.returnDate}</td>
-                    <td>${each.customers.custName}</td>
-                    <td>${each.car.carNumber}</td>
+                    <td>${each.checkId}</td>
+                    <td>${each.checkDate}</td>
+                    <td>${each.field}</td>
+                    <td>${each.problem}</td>
+                    <td>${each.paying}</td>
                     <td>${each.user.userName}</td>
+                    <td>${each.rentId}</td>
                     <td>
-                        <a href="lease/modifyRent.action?tableId=${each.tableId}">编辑</a>
+                        <a href="returnCar/modifyCheckTable.action?checkId=${each.checkId}">编辑</a>
+                    </td>
+                    <td>
+                        <form action="returnCar/deleteCheckTable.action?checkId=${each.checkId}"
+                                    id="${each.checkId}">
+                            <a href="javascript:void(0);" onclick="relDelete(${each.checkId});">删除</a>
+                        </form>
+
                     </td>
                 </tr>
         </c:forEach>
@@ -113,7 +138,8 @@
                  <input type="button" value="首页" onclick="firstPage();">
                  <input type="button" value="上一页" onclick="prePage();">
              </c:if>
-                 <span>跳转到<input id="toPageNo" type="text">/${pageBean.totalPage}页<input type="button" value="跳转" onclick="goToPage();"></span>
+                跳转到
+                 <input id="toPageNo" type="text">/${pageBean.totalPage}页<input type="button" value="跳转" onclick="goToPage();">
              <c:if test="${pageBean.currentPage != pageBean.totalPage}">
                  <input type="button" value="下一页" onclick="nextPage();">
                  <input type="button" value="尾页" onclick="lastPage();">

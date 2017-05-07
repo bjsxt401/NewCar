@@ -9,8 +9,13 @@
   Time: 15:16
   To change this template use File | Settings | File Templates.
 --%>
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
+%>
 <html>
 <head>
+    <base href="<%=basePath%>">
     <title>信息验证</title>
     <style type="text/css">
         .red{
@@ -30,7 +35,7 @@
             if(result){
                 $.ajax({
                     "method":"post",
-                    "url":"/newcar/customer/selectIdentity.action" ,
+                    "url":"customer/selectIdentity.action" ,
                     "data":{
                         "identity":$("#identity").val()
                     } ,
@@ -59,7 +64,7 @@
     </script>
 </head>
 <body>
-<form action="/newcar/customer/register.action" method="post" id="registerCustomer">
+<form action="customer/register.action" method="post" id="registerCustomer">
 
     <table width="100%" cellpadding="0" cellspacing="0" border="0" style="text-align: center">
         <tr>

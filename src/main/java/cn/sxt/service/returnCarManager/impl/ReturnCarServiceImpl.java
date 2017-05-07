@@ -13,6 +13,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by beichunming on 2017/5/4.
@@ -45,5 +47,29 @@ public class ReturnCarServiceImpl implements ReturnCarService {
 
     public void createCheckTable(CheckTable checkTable) {
         this.returnCarMapper.createCheckTable(checkTable);
+    }
+
+    public List<CheckTable> selectCheckTableByPage(Map<String, Object> map) {
+        List<CheckTable> checkTable = this.returnCarMapper.selectCheckTableByPage(map);
+        return checkTable;
+    }
+
+    public Integer selectCheckTableByPageTotal(CheckTable checkTable) {
+        Integer total = this.returnCarMapper.selectCheckTableByPageTotal(checkTable);
+        return total;
+    }
+
+    public CheckTable modifyCheckTable(CheckTable checkTable) {
+        CheckTable checkTableResult = this.returnCarMapper.modifyCheckTable(checkTable);
+        return checkTableResult;
+    }
+
+    public void deleteCheckTable(CheckTable checkTable) {
+        System.out.println(checkTable);
+        this.returnCarMapper.deleteCheckTable(checkTable);
+    }
+
+    public void updateCheckTable(CheckTable checkTable) {
+        this.returnCarMapper.updateCheckTable(checkTable);
     }
 }

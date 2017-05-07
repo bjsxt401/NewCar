@@ -3,6 +3,18 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.sxt.mapper.ReturnCarMapper">
+    <resultMap id="checkTablePageMap" type="cn.sxt.entity.CheckTable">
+        <id column="checkid" property="checkId"></id>
+        <result property="checkDate" column="checkdate"></result>
+        <result property="field" column="field"></result>
+        <result property="problem" column="problem"></result>
+        <result property="paying" column="paying"></result>
+        <result property="checkUserId" column="checkuserid"></result>
+        <result property="rentId" column="rentid"></result>
+        <association property="user" javaType="cn.sxt.entity.CheckTable"
+                     column="checkuserid" select="cn.sxt.mapper.UserMapper.selectUserById">
+        </association>
+    </resultMap>
 
         <update id="updateCar">
               update cars set  isrenting = '未出租' where carid = #{carId}
@@ -14,5 +26,117 @@
 
          </insert>
 
+
+    <select id="selectCheckTableByPage" resultMap="checkTablePageMap">
+           select  checkid as checkId ,checkdate as checkDate,field,problem,paying,checkuserid AS
+                      checkUserId,rentid as rentId FROM checktable
+            <where>
+                <if test="checkId!=null and checkId!=''">
+                    checkId = #{checkTable.checkId}
+                </if>
+                <if test="checkDate!=null and checkDate!=''">
+                    checkDate = str_to_date(#{checkTable.checkDate},'%Y-%m-%d')
+                </if>
+                <if test="field!=null and field!=''">
+                    field = #{checkTable.field}
+                </if>
+                <if test="problem!=null and problem!=''">
+                    problem = #{checkTable.problem}
+                </if>
+                <if test="paying!=null and paying!=''">
+                    paying = #{checkTable.paying}
+                </if>
+                <if test="checkUserId!=null and checkUserId!=''">
+                    checkUserId = #{checkTable.checkUserId}
+                </if>
+                <if test="rentId!=null and rentId!=''">
+                    rentId = #{checkTable.rentId}
+                </if>
+            </where>
+        ORDER BY checkId
+        limit #{pageBean.startNum},#{pageBean.pageSize}
+
+    </select>
+    <select id="selectCheckTableByPageTotal" resultType="java.lang.Integer">
+           select  count(checkid)  FROM checktable
+            <where>
+                <if test="checkId!=null and checkId!=''">
+                    checkId = #{checkId}
+                </if>
+                <if test="checkDate!=null and checkDate!=''">
+                    checkDate = str_to_date(#{checkDate},'%Y-%m-%d')
+                </if>
+                <if test="field!=null and field!=''">
+                    field = #{field}
+                </if>
+                <if test="problem!=null and problem!=''">
+                    problem = #{problem}
+                </if>
+                <if test="paying!=null and paying!=''">
+                    paying = #{paying}
+                </if>
+                <if test="checkUserId!=null and checkUserId!=''">
+                    checkUserId = #{checkUserId}
+                </if>
+                <if test="rentId!=null and rentId!=''">
+                    rentId = #{rentId}
+                </if>
+            </where>
+
+    </select>
+
+
+    <select id="modifyCheckTable" resultMap="checkTablePageMap">
+        select  checkid as checkId ,checkdate as checkDate,field,problem,paying,checkuserid AS
+        checkUserId,rentid as rentId FROM checktable
+        <where>
+            <if test="checkId!=null and checkId!=''">
+                checkId = #{checkId}
+            </if>
+            <if test="checkDate!=null and checkDate!=''">
+                checkDate = str_to_date(#{checkDate},'%Y-%m-%d')
+            </if>
+            <if test="field!=null and field!=''">
+                field = #{field}
+            </if>
+            <if test="problem!=null and problem!=''">
+                problem = #{problem}
+            </if>
+            <if test="paying!=null and paying!=''">
+                paying = #{paying}
+            </if>
+            <if test="checkUserId!=null and checkUserId!=''">
+                checkUserId = #{checkUserId}
+            </if>
+            <if test="rentId!=null and rentId!=''">
+                rentId = #{rentId}
+            </if>
+        </where>
+
+    </select>
+
+    <delete id="deleteCheckTable" >
+        delete from checktable where checkid = #{checkId}
+    </delete>
+
+    <update id="updateCheckTable">
+        update  checktable
+        <set>
+            <if test="field!='' and field !=null">
+                field = #{field}  ,
+            </if>
+            <if test="checkDate!='' and checkDate !=null">
+                checkDate = str_to_date(#{checkDate},'%Y-%m-%d')   ,
+            </if>
+            <if test="problem!='' and problem !=null">
+                problem = #{problem},
+            </if>
+            <if test="paying!='' and paying !=null">
+                paying = #{paying}   ,
+            </if>
+        </set>
+        where checkid = #{checkId}
+
+    </update>
 
 </mapper>

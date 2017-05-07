@@ -60,7 +60,7 @@
 <body>
 
         <table>
-            <form action="/newcar/customer/modifyCustomerPwd.action" method="post" id="myForm">
+            <form action="customer/modifyCustomerPwd.action" method="post" id="myForm">
                 <input type="hidden" name="id" value="${modifyCustomer.id}">
             <tr>
                 <th>旧密码</th>

@@ -23,7 +23,7 @@
 
 </head>
 <body>
-<form action="/newcar/lease/updateRent.action" method="post">
+<form action="lease/updateRent.action" method="post">
 
     <table width="100%" cellpadding="0" cellspacing="0" border="0" style="text-align: left">
         <tr>
