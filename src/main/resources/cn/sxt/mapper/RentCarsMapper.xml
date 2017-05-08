@@ -6,7 +6,8 @@
 
     <select id="selectAllCarsInf" resultType="cn.sxt.entity.Cars">
         SELECT     carid as carId,carnumber as carNumer,cartype as carType,color,price
-        ,           rentprice as rentPrice  ,deposit,isrenting,description
+        ,           rentprice as rentPrice  ,deposit,isrenting,description,carimgeid AS
+                    carImageId,suffix
           from cars
           where isrenting = '0'
                     
