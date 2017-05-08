@@ -58,10 +58,10 @@ public class LeaseController {
      * @param rent  接收订单信息存储  并修改车辆出租状态
      * @return
      */
-    @RequestMapping("/setRentInf")
-    public String setRentInf(Rent rent){
+    @RequestMapping("/createRent")
+    public String createRent(Rent rent){
         this.leaseService.createRent(rent);
-        return "carBusinessSystem/selectCar";
+        return "carBusinessSystem/result";
     }
 
 
