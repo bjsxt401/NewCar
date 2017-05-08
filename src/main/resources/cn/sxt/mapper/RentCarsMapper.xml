@@ -8,7 +8,7 @@
         SELECT     carid as carId,carnumber as carNumer,cartype as carType,color,price
         ,           rentprice as rentPrice  ,deposit,isrenting,description
           from cars
-          where isrenting = '已入库'
+          where isrenting = '0'
                     
     </select>
 

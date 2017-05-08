@@ -70,8 +70,8 @@
             </td>
             <td>
                 <select name="rentFlag" id="rentFlag" >
-                    <option value="出租中">出租中</option>
-                    <option value="已入库">已入库</option>
+                    <option value="1">出租中</option>
+                    <option value="0">未出租</option>
                 </select>
             </td>
             <td>
