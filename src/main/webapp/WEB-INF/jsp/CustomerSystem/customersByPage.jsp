@@ -26,7 +26,6 @@
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.js"></script>
 
     <script type="text/javascript" >
-
         var currentPage = 1; // 当前是第几页
         var totalPage = 0; // 总计有多少页
         $(function (){
