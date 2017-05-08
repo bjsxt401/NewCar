@@ -70,6 +70,9 @@
                   <if test="rent.returnDate!='' and rent.returnDate!=null">
                      AND returnDate = str_to_date(#{rent.returnDate},'%Y-%m-%d')
                   </if>
+                  <if test="rent.rentFlag!='' and rent.rentFlag!=null">
+                     AND rentFlag = #{rent.rentFlag}
+                  </if>
               </where>
             order by tableid
          limit ${pageBean.startNum},${pageBean.pageSize}
