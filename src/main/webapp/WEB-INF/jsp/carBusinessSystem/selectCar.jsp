@@ -23,7 +23,7 @@
                   <input type="hidden" name="carId" value="${each.carId}">
              <tr>
                  <td><div id="carImg${each.carId}" >
-                     <img src="upload/img/${each.carImageId}${suffix}" alt="">
+                     <img src="upload/img/${each.carImageid}${each.suffix}" alt="">
                  </div></td>
                  <td>${status.index+1}</td>
                  <td>汽车型号${each.carType}</td>

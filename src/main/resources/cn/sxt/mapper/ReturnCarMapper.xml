@@ -17,7 +17,7 @@
     </resultMap>
 
         <update id="updateCar">
-              update cars set  isrenting = '未出租' where carid = #{carId}
+              update cars set  isrenting = '0' where carid = #{carId}
         </update>
 
          <insert id="createCheckTable">
