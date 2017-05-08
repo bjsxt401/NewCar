@@ -6,7 +6,7 @@
 
     <select id="selectAllCarsInf" resultType="cn.sxt.entity.Cars">
         SELECT     carid as carId,carnumber as carNumer,cartype as carType,color,price
-        ,           rentprice as rentPrice  ,deposit,isrenting,description,carimgeid AS
+        ,           rentprice as rentPrice  ,deposit,isrenting,description,carimageid AS
                     carImageid,suffix
           from cars
           where isrenting = '0'
@@ -21,7 +21,7 @@
     </select>
 
     <update id="changeCarRenting">
-         update cars SET isrenting = #{isrenting} where carId = #{carId}
+         update cars SET isrenting = '1' where carId = #{carId}
     </update>
 
     <select id="selectCarInfByCondition" resultType="cn.sxt.entity.Cars">
