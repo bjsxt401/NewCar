@@ -16,7 +16,7 @@
 
              var shouldReturnDate = new Date($("#shouldReturnDate").val());
              var beginDate = new Date($("#beginDate").val());
-             var date = (shouldReturnDate- beginDate)/(24*60*60*1000);
+             var date = parseInt((shouldReturnDate- beginDate)/(24*60*60*1000));
              if(date==0){
                  date = 1;
              }

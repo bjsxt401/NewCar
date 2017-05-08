@@ -18,10 +18,25 @@
     <script type="text/javascript" >
         $(function () {
             var val = "${motifyRent.rentFlag}";
-
-            alert(val);
             $("#rentFlag").val(val);
         })
+        function changePrice(){
+            //租金
+           var rentPrice =  ${motifyRent.car.rentPrice}
+               rentPrice = parseFloat(rentPrice);
+            //押金
+            var deposit = ${motifyRent.car.deposit}
+                deposit = parseFloat(deposit);
+            var shouldReturnDate = new Date($("#shouldReturnDate").val());
+            var beginDate = new Date($("#beginDate").val());
+            var date = parseInt((shouldReturnDate- beginDate)/(24*60*60*1000));
+            if(date==0){
+                date = 1;
+            }
+            $("#shouldPayPrice").val(date*rentPrice+deposit);
+            $("#shouldPayPriceIdSpan")[0].innerHTML=date*rentPrice+deposit;
+
+        }
     </script>
 
 </head>
@@ -41,7 +56,8 @@
                 应付金
             </td>
             <td>
-                <span>${motifyRent.shouldPayPrice}</span>
+                <span id="shouldPayPriceIdSpan">${motifyRent.shouldPayPrice}</span>
+                <input type="hidden" name="shouldPayPrice" id="shouldPayPrice" value="${motifyRent.shouldPayPrice}">
 
             </td>
         </tr>
@@ -58,7 +74,8 @@
             </td>
             <td>
                 <input type="text" name="shouldReturnDate" id="shouldReturnDate"
-                       class="Wdate" onclick="WdatePicker();"value="${motifyRent.shouldReturnDate}" >
+                       class="Wdate" onclick="WdatePicker();"
+                       value="${motifyRent.shouldReturnDate}" onchange="changePrice();" >
             </td>
         </tr>
         <tr>

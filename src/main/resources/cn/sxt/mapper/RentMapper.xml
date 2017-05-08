@@ -172,6 +172,9 @@
             <if test="rentFlag!='' and rentFlag !=null">
                  rentFlag = #{rentFlag}   ,
             </if>
+            <if test="shouldPayPrice!='' and shouldPayPrice !=null">
+                shouldPayPrice = #{shouldPayPrice}   ,
+            </if>
         </set>
         where tableid = #{tableId}
     </update>
