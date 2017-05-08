@@ -22,7 +22,9 @@
               <form action="lease/selectedCar.action" method="post">
                   <input type="hidden" name="carId" value="${each.carId}">
              <tr>
-                 <td><div id="carImg${each.carId}"></div></td>
+                 <td><div id="carImg${each.carId}" >
+                     <img src="upload/img/${each.carImageId}${suffix}" alt="">
+                 </div></td>
                  <td>${status.index+1}</td>
                  <td>汽车型号${each.carType}</td>
                  <td>汽车颜色${each.color}</td>
