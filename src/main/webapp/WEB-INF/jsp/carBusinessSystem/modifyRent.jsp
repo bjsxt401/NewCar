@@ -17,7 +17,10 @@
     <script type="text/javascript" src="${pageContext.request.contextPath}/My97DatePicker/WdatePicker.js"></script>
     <script type="text/javascript" >
         $(function () {
-            $("#rentFlag").val('${motifyRent.rentFlag}');
+            var val = "${motifyRent.rentFlag}";
+
+            alert(val);
+            $("#rentFlag").val(val);
         })
     </script>
 
@@ -70,10 +73,11 @@
                 出租单状态
             </td>
             <td>
-                <select name="rentFlag" id="rentFlag"  >
-                    <option value="0">已入库</option>
+                <select class="selector" name="rentFlag" id="rentFlag"  >
+                    <option value="出租中">出租中</option>
 
-                    <option value="1">出租中</option>
+                    <option value="已入库">已入库</option>
+
                 </select>
             </td>
 
