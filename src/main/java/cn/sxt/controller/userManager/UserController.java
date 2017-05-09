@@ -3,6 +3,7 @@ package cn.sxt.controller.userManager;
 import cn.sxt.entity.Role;
 import cn.sxt.entity.Users;
 import cn.sxt.service.userManager.UserService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.PrintWriter;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -44,9 +46,10 @@ public class UserController {
      * @param request
      * @return
      */
-    @RequestMapping(value = "/login",method = {RequestMethod.POST})
-   public String login(@RequestParam("loginuser")String userName, @RequestParam("loginpwd")String userPwd ,HttpServletRequest request){
-        try {
+    @RequestMapping(value = "/login",method = {RequestMethod.POST},produces={"application/json;charset=UTF-8"})
+    @ResponseBody
+   public String login(@RequestParam("loginuser")String userName, @RequestParam("loginpwd")String userPwd ,HttpServletRequest request)  {
+
             Users user = new Users();
             user.setUserName(userName);
             user.setUserPwd(userPwd);
@@ -58,19 +61,21 @@ public class UserController {
                 //获取所有的角色信息,并存入到session中
                 List<Role> roleList = this.userService.getAllRole();
                 session.setAttribute("roleList",roleList);
-                return "redirect:/dispatcher/main.action";
+                System.out.println("users===="+users);
+                try {
+                    return new  ObjectMapper().writeValueAsString(users);
+                } catch (JsonProcessingException e) {
+                    e.printStackTrace();
+                }
             }
-            
 
-            //System.out.println("users+====="+users+"roleList======="+roleList);
-        }   catch (Exception e){
-            e.printStackTrace();
-        }
-
-        return "redirect:/login.jsp";
-   }
+        return null;
+    }
     
-
+   @RequestMapping(value = "/toMain")
+   public String toMain(){
+       return "redirect:/dispatcher/main.action";
+   }
     /**
      * 用户注册
      * @param user
@@ -231,6 +236,11 @@ public class UserController {
        return null;
    }
 
+    /**
+     * 登出
+     * @param request
+     * @return
+     */
    @RequestMapping(value = "/logout")
    public String logout(HttpServletRequest request){
        //获取session中的所有属性
@@ -242,6 +252,21 @@ public class UserController {
        }
        session.invalidate();
        return "redirect:/login.jsp";
+   }
+
+   @RequestMapping(value = "/selectIdentity",produces={"application/json;charset=UTF-8"})
+   @ResponseBody
+   public String selectIdentity(String identity){
+       Integer result =   this.userService.selectIdentity(identity);
+       System.out.println("result=="+result);
+       Map<String,Integer> map = new HashMap<String,Integer>();
+       map.put("result",result);
+       try {
+           return  new ObjectMapper().writeValueAsString(map);
+       }catch (Exception e){
+
+       }
+       return null;
    }
 
     /**

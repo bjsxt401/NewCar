@@ -35,10 +35,48 @@
             margin-bottom: 0px;
             background-color: #EEF2FB;
         }
+        .red{
+            color: red;
+        }
+        .green{
+            color: green;
+        }
     </style>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/user.js"></script>
     <script type="text/javascript">
+        var rootPath = '${pageContext.request.contextPath}';
+        function checkIdentityAndGender(){
+            var result = checkIdentity();
+            var span = $("#identitySpan");
+            if(result){
+                $.ajax({
+                    "method":"post",
+                    "url":rootPath+"/user/selectIdentity.action",
+                    "data":{
+                        "identity":$("#identity").val()
+                    } ,
+                    "success":function (data) {
+                        if(data.result){
+                            span.attr("class","red");
+                            span[0].innerHTML="该证件号已被注册";
+
+                        }else{
+                            span.attr("class","green");
+                            span[0].innerHTML="该证件号尚未被注册";
+                        }
+                    }
+                });
+            }
+        }
         function subForm(){
-            document.forms[0].submit();
+            var result1 = checkPassword();
+            var result2 = checkIdentity();
+            var result4 = checkPhone();
+            if((result1&&result2)&&result4){
+                document.forms[0].submit();
+            }
+
         }
     </script>
 </head>
@@ -70,19 +108,34 @@
      		 <tr>
       <td width="14%"><div align="center" class="left_txt">登录名</div></td>
       <td width="23%"><input type="text" name="userName" id="userName" >*</td>
+
+             </tr>
+            <tr>
+    <td><div align="center" class="left_txt">姓名</div></td>
+      <td><input type="text" id="fullName" name="fullName">*</td>
+
+    </tr>
+            <tr>
       <td width="15%"><div align="center" class="left_txt">身份证</div></td>
-      <td width="48%"><input type="text" name="identity" id="identity">*</td>
+      <td width="48%"><input type="text" name="identity" id="identity" onblur="checkIdentityAndGender();">*</td>
+                 <td width="25%"><span id="identitySpan">&nbsp;</span></td>
     </tr>
     <tr>
       <td><div align="center" class="left_txt">用户密码</div></td>
-      <td><input type="password" name="userPwd" id="userPwd" size="21" >*</td>
+      <td><input type="password" name="userPwd" id="userPwd" size="21" onblur="checkPassword();">*</td>
+        <td><span id="userPwdSpan">密码为6-11位，且必须有英文</span></td>
+    </tr>
+             <tr>
        <td><div align="center" class="left_txt">联系电话</div></td>
-      <td><input type="text" name="phone" id="phone">*</td>
+      <td><input type="text" name="phone" id="phone" onblur="checkPhone()">*</td>
+         <td><span id="phoneSpan">&nbsp;</span></td>
 
     </tr>
     <tr>
       <td><div align="center" class="left_txt">地址</div></td>
       <td><input type="text" name="address" id="address">*</td>
+    </tr>
+             <tr>
      <td><div align="center" class="left_txt">性别</div></td>
       <td>
      <select NAME="gender" id="sex" style="width: 105px;">
@@ -96,6 +149,8 @@
     <tr>
       <td><div align="center" class="left_txt">职位 </div></td>
       <td><input type="text" name="position" id="position">*</td>
+    </tr>
+             <tr>
       <td><div align="center" class="left_txt">用户类型</div></td>
       <td><label>
         <select name="roleid">
@@ -107,11 +162,7 @@
         </select>
       </label></td>
     </tr>
-    <tr>
-    <td><div align="center" class="left_txt">姓名</div></td>
-      <td><input type="text" id="fullName" name="fullName">*</td>
 
-    </tr>
      	</table>
     <table align="left" width="100%">
 	<tr>

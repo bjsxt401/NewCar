@@ -12,9 +12,9 @@ import java.util.Map;
  * Created by beichunming on 2017/4/28.
  */
 public interface UserService {
-    public Users loginByUserNameAndUserPswd(Users user) throws SerialException,ServiceException;
+    public Users loginByUserNameAndUserPswd(Users user);
 
-    public List<Role>getAllRole() throws ServiceException;
+    public List<Role>getAllRole();
 
     void registerUser(Users user) throws ServiceException;
 
@@ -25,4 +25,6 @@ public interface UserService {
     void updateUser(Users user);
 
     void deleteUser(Users user);
+
+    public Integer selectIdentity(String identity);
 }

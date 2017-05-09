@@ -46,7 +46,7 @@ public class UserServiceImpl implements UserService{
      * @throws ServiceException
      */
     @Override
-    public Users loginByUserNameAndUserPswd(Users user) throws ServiceException{
+    public Users loginByUserNameAndUserPswd(Users user){
         return this.userMapper.getUserByUser(user);
     }
 
@@ -127,7 +127,21 @@ public class UserServiceImpl implements UserService{
      * @throws ServiceException
      */
     @Override
-    public List<Role> getAllRole() throws ServiceException {
+    public List<Role> getAllRole() {
         return this.roleMapper.getAllRoles();
+    }
+
+    /**
+     * 查询证件号是否存在
+     * @param identity
+     * @return
+     */
+    public Integer selectIdentity(String identity) {
+        Users result = this.userMapper.selectIdentity(identity);
+        if (result!=null){
+            return 1;
+        }else {
+            return 0;
+        }
     }
 }

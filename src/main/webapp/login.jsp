@@ -21,12 +21,35 @@
     <script src="js/cloud.js" type="text/javascript"></script>
 
     <script language="javascript">
+        var rootPath = '${pageContext.request.contextPath}';
         $(function(){
             $('.loginbox').css({'position':'absolute','left':($(window).width()-692)/2});
             $(window).resize(function(){
                 $('.loginbox').css({'position':'absolute','left':($(window).width()-692)/2});
             })
         });
+        function loginAction() {
+            var  loginuser =$("#loginuser").val();
+            var  loginpwd =$("#loginpwd").val();
+            $.ajax({
+                'type':'post',
+                'url':rootPath+"/user/login.action",
+                'data':{
+                    "loginuser":loginuser,
+                    "loginpwd":loginpwd
+                },
+                'success':function (data){
+                    if (data.userName){
+                        window.location.href="user/toMain.action";
+                    }else {
+                        alert("用户名或密码错误==");
+                    }
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                    alert("用户名或密码错误-------");
+                }
+            });
+        }
     </script>
 
 </head>
@@ -57,9 +80,9 @@
     <div class="loginbox">
         <form action="user/login.action" method="post">
             <ul>
-                <li><input name="loginuser" type="text" class="loginuser" value="admin" onclick="JavaScript:this.value=''"/></li>
-                <li><input name="loginpwd" type="text" class="loginpwd" value="密码" onclick="JavaScript:this.value=''"/></li>
-                <li><input name="button" type="submit" class="loginbtn" value="登录"   /><label><input name="" type="checkbox" value="" checked="checked" />记住密码</label><label><a href="#">忘记密码？</a></label></li>
+                <li><input name="loginuser" id="loginuser" type="text" class="loginuser" value="admin" onclick="JavaScript:this.value=''"/></li>
+                <li><input name="loginpwd"  id="loginpwd" type="text" class="loginpwd" value="密码" onclick="JavaScript:this.value=''"/></li>
+                <li><input name="button" type="button" class="loginbtn" value="登录" onclick="javascript:loginAction();"  /><label><input name="" type="checkbox" value="" checked="checked" />记住密码</label><label><a href="#">忘记密码？</a></label></li>
             </ul>
         </form>
 

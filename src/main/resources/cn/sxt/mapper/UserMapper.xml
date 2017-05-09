@@ -203,4 +203,10 @@
         where uid = #{uId}
     </select>
     <!--22222222222-->
+    <select id="selectIdentity" resultType="Users">
+           SELECT   uid,username AS userName,identity,fullname AS fullName,gender,
+        address,phone ,roleid,userpwd AS userPwd,position
+         FROM users
+         WHERE  identity=#{identity}
+    </select>
 </mapper>

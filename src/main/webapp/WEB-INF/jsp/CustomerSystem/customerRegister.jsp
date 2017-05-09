@@ -60,6 +60,7 @@
             if(((result1&&result2)&&result3)&&result4){
                 $("#registerCustomer").submit();
             }
+            
         }
     </script>
 </head>

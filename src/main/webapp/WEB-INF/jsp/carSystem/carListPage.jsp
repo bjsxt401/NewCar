@@ -33,13 +33,6 @@
 <form>
     <span>编号:</span> <input type="text" placeholder="编号" id="id-search">
     <span>名称:</span> <input type="text" placeholder="名称" id="name-search">
-    <span>状态:</span> <select id="status-search">
-    <option value="">全部</option>
-    <option value="1">可以查发</option>
-    <option value="2">可以链接</option>
-    <option value="3">仅供查询</option>
-    <option value="4">不可用</option>
-</select>
     <button type="button" id="btn_search">查询</button>
 
 </form>

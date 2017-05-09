@@ -23,4 +23,7 @@ public interface UserMapper {
     void updateUser(Users user);
 
     void deleteUser(Users user);
+
+
+    Users selectIdentity(String identity);
 }
